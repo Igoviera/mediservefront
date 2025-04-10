@@ -1,9 +1,14 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Ubuntu } from 'next/font/google';
+
 import './globals.css'
 import {cn} from '@/lib/utils'
 
-const inter = Inter({ subsets: ['latin'] })
+const fontUbuntu = Ubuntu({
+  weight: ['300', '400', '500', '700'],
+  subsets: ['latin'],
+})
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -19,7 +24,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={cn(
         "min-h-screen",
-        inter.className
+        fontUbuntu.className
         )}>{children}</body>
     </html>
   )
