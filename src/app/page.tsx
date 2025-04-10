@@ -1,6 +1,6 @@
-import CreateDoctor from "@/components/createDoctor/createDoctor";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Agendamento from "@/pages/Agendamento";
 
 export default function Home() {
   const doctors = [
@@ -21,8 +21,7 @@ export default function Home() {
   return (
     <main className="flex">
 
-
-      <CreateDoctor/>
+<Agendamento />
     </main>
   );
 }
