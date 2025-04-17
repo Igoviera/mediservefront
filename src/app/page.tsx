@@ -20,9 +20,8 @@ export default function Home() {
 
   return (
     <main className="flex">
-
-
-      <CreateDoctor/>
+      <Link href="/menu-principal">Menu</Link>
+      {/* <CreateDoctor/> */}
     </main>
   );
 }
