@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '@/components/Input'
 import { SlActionUndo } from "react-icons/sl";
 
-function Agendamento() {
+export default function Page() {
   return (
     <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       {/* Quadrado branco que engloba tudo */}
@@ -40,5 +40,3 @@ function Agendamento() {
     </div>
   )
 }
-
-export default Agendamento
