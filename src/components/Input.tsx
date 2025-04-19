@@ -6,15 +6,15 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 
 const Input = ({ label, ...props }: InputProps) => {
   return (
-    <div className="flex flex-col w-[432px]">
+    <div className="flex flex-col w-full">
       {label && (
-        <label className="h-[14px] mb-[4px] text-[14px] leading-[14px]">
+        <label className="mb-1 text-[14px] leading-[14px]">
           {label}
         </label>
       )}
       <input
         {...props}
-        className="w-full bg-white border border-[#CCCCCC] rounded-[6.11px] px-[12.23px] py-[12.23px]"
+        className="w-full bg-white border border-[#CCCCCC] rounded-[6px] px-3 py-3"
       />
     </div>
   )
