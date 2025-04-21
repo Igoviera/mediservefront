@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Page from "./agendar-consulta/page";
+
 
 export default function Home() {
   const doctors = [
@@ -19,6 +21,7 @@ export default function Home() {
 
   return (
     <main className="flex">
+      <Page />
     </main>
   );
 }

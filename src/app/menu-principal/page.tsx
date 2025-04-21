@@ -1,110 +1,43 @@
-import Image from "next/image";
-import Link from "next/link";
-
-import IconFlecha from "../../../public/assets/icon-flecha.svg";
-import IconMaleta from "../../../public/assets/icon-maleta.svg";
-import IconDocumento from "../../../public/assets/icon-documento.svg";
-import IconSuporte from "../../../public/assets/icon-suporte.svg";
+import IconDocumento from "../../../public/assets/icon-documento.png";
+import IconAgendamento from "../../../public/assets/icon-agendamento.png";
+import IconUser from "../../../public/assets/icon-usuario.png";
+import IconGrupo from "../../../public/assets/icon-grupo.png";
+import CardMenu from "../../components/Menu/MenuCard";
 
 export default function(){
   return(
     <>
-      <main className="bg-[#FFFFFF] text-[ubuntu] border border-[#C8C8C8] rounded-md mx-10 my-10">
-        <section className="mx-10 my-10 px-4 py-4 shadow-md border-none rounded-lg">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-row items-center gap-6">
-              <Image
-                width={40} height={40}
-                alt="icon-maleta"
-                src={IconMaleta}
-              />
-              <p className="text-[22px] text-[#2C5891] font-[700]">Agendar Consultas</p>
-            </div>
-            <Link href="">
-              <Image
-                width={40} height={40}
-                alt="icon-flecha"
-                src={IconFlecha}
-              />
-            </Link>
-          </div>
-        </section>
-        <section className="mx-10 my-10 px-4 py-4 shadow-md border-none rounded-lg">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-row items-center gap-6">
-              <Image
-                width={40} height={40}
-                alt="icon-documento"
-                src={IconDocumento}
-              />
-              <p className="text-[22px] text-[#2C5891] font-[700]">Consultas Agendadas</p>
-            </div>
-            <Link href="">
-              <Image
-                width={40} height={40}
-                alt="icon-flecha"
-                src={IconFlecha}
-              />
-            </Link>
-          </div>
-        </section>
-        <section className="mx-10 my-10 px-4 py-4 shadow-md border-none rounded-lg">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-row items-center gap-6">
-              <Image
-                width={40} height={40}
-                alt="icon-maleta"
-                src={IconMaleta}
-              />
-              <p className="text-[22px] text-[#2C5891] font-[700]">Pacientes Cadastrados</p>
-            </div>
-            <Link href="">
-              <Image
-                width={40} height={40}
-                alt="icon-flecha"
-                src={IconFlecha}
-              />
-            </Link>
-          </div>
-        </section>
-        <section className="mx-10 my-10 px-4 py-4 shadow-md border-none rounded-lg">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-row items-center gap-6">
-              <Image
-                width={40} height={40}
-                alt="icon-documento"
-                src={IconDocumento}
-              />
-              <p className="text-[22px] text-[#2C5891] font-[700]">Médicos Cadastrados</p>
-            </div>
-            <Link href="">
-              <Image
-                width={40} height={40}
-                alt="icon-flecha"
-                src={IconFlecha}
-              />
-            </Link>
-          </div>
-        </section>
-        <section className="mx-10 my-10 px-4 py-4 shadow-md border-none rounded-lg">
-          <div className="flex flex-row justify-between items-center">
-            <div className="flex flex-row items-center gap-6">
-              <Image
-                width={40} height={40}
-                alt="icon-suporte"
-                src={IconSuporte}
-              />
-              <p className="text-[22px] text-[#2C5891] font-[700]">Cadastrar Médico/Paciente</p>
-            </div>
-            <Link href="">
-              <Image
-                width={40} height={40}
-                alt="icon-flecha"
-                src={IconFlecha}
-              />
-            </Link>
-          </div>
-        </section>
+      <main className="bg-[#FFFFFF] text-[ubuntu] border border-[#C8C8C8] rounded-md mx-3 sm:mx-10 my-10">
+        <CardMenu
+          href="" 
+          icon={IconAgendamento} 
+          label="Agendar Consultas"
+        />
+        <CardMenu
+          href="" 
+          icon={IconDocumento} 
+          label="Consultas Agendadas"
+        />
+        <CardMenu 
+          href="" 
+          icon={IconGrupo} 
+          label="Pacientes Cadastrados"
+        />
+        <CardMenu
+          href="" 
+          icon={IconGrupo} 
+          label="Medicos Cadastrados"
+        />
+        <CardMenu
+          href="" 
+          icon={IconUser} 
+          label="Cadastrar Médico"
+        />
+        <CardMenu
+          href="" 
+          icon={IconUser} 
+          label="Cadastrar Paciente"
+        />
       </main>
     </>
   );
