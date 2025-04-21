@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string
+  label?: string;
+  error?: string; //adicionando prop 'error'
 }
 
-const Input = ({ label, ...props }: InputProps) => {
+const Input = ({ label, error, ...props }: InputProps) => {
   return (
     <div className="flex flex-col w-full">
       {label && (
@@ -14,10 +15,17 @@ const Input = ({ label, ...props }: InputProps) => {
       )}
       <input
         {...props}
-        className="w-full bg-white border border-[#CCCCCC] rounded-[6px] px-3 py-3"
+        className={`w-full bg-white border ${
+          error ? 'border-red-500' : 'border-[#CCCCCC]'
+        } rounded-[6px] px-2 py-2`}
       />
+      {error && (
+        <span className="text-red-500 text-xs mt-1">
+          {error}
+        </span>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

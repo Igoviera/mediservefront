@@ -9,26 +9,31 @@ export default function Page() {
   const [profissional, setProfissional] = useState('');
   const [data, setData] = useState('');
   const [hora, setHora] = useState('');
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   // validação
   const validateForm = () => {
-    if (/\d/.test(nome)) return "Nome não pode conter números.";
-    if (/\d/.test(profissional)) return "Profissional não pode conter números.";
-    if (data < new Date().toISOString().split('T')[0]) return "Data não pode ser no passado.";
-    if (!hora) return "Informe o horário.";
-    return null;
+    const erros: { [key: string]: string } = {};
+
+    if (/\d/.test(nome)) erros.nome = "Nome não pode conter números.";
+    if (/\d/.test(profissional)) erros.profissional = "Profissional não pode conter números.";
+    if (data < new Date().toISOString().split('T')[0]) erros.data = "Data não pode ser no passado.";
+    if (!hora) erros.hora = "Informe o horário.";
+    if (hora && (hora < "08:00" || hora > "18:00")) erros.hora = "Horário deve estar entre 08:00 e 18:00.";
+
+    setErrors(erros);
+    return Object.keys(erros).length === 0;
   };
 
-  
-  const handleChange = (setter) => (e) => {
+  const handleChange = (setter: React.Dispatch<React.SetStateAction<string>>) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if (/[^a-zA-Z\s]/.test(value)) return; // Bloqueia números e caracteres especiais
     setter(value);
   };
 
   const handleAgendar = () => {
-    const errorMessage = validateForm();
-    if (errorMessage) return alert(errorMessage);
+    const formIsValid = validateForm();
+    if (!formIsValid) return;
     console.log("Agendado com:", { nome, profissional, data, hora });
   };
 
@@ -38,18 +43,46 @@ export default function Page() {
         <h1 className="font-bold text-[45.58px] font-[Poppins] mb-10 text-center">Agendar Consulta</h1>
         <div className="w-full flex flex-col items-center gap-[24px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-[7.64px] w-full">
-            <Input type="text" placeholder="Nome Completo" label="Nome completo:" value={nome} onChange={handleChange(setNome)} />
-            <Input type="text" placeholder="Profissional" label="Profissional:" value={profissional} onChange={handleChange(setProfissional)} />
-            <Input type="date" label="Data do atendimento:" value={data} onChange={(e) => setData(e.target.value)} />
-            <Input type="time" label="Horário:" value={hora} onChange={(e) => { if (e.target.value >= "08:00" && e.target.value <= "18:00") setHora(e.target.value); }} min="08:00" max="18:00" />
+            <Input
+              type="text"
+              placeholder="Nome Completo"
+              label="Nome completo:"
+              value={nome}
+              onChange={handleChange(setNome)}
+              error={errors.nome}
+            />
+            <Input
+              type="text"
+              placeholder="Profissional"
+              label="Profissional:"
+              value={profissional}
+              onChange={handleChange(setProfissional)}
+              error={errors.profissional}
+            />
+            <Input
+              type="date"
+              label="Data do atendimento:"
+              value={data}
+              onChange={(e) => setData(e.target.value)}
+              error={errors.data}
+            />
+            <Input
+              type="time"
+              label="Horário:"
+              value={hora}
+              onChange={(e) => setHora(e.target.value)}
+              min="08:00"
+              max="18:00"
+              error={errors.hora}
+            />
           </div>
 
           <div className="flex flex-col sm:flex-row gap-[20px] w-full justify-center">
-            <button className="w-full sm:w-[166.15px] h-[55.03px] rounded-[13.93px] bg-[#222222] text-white font-semibold flex items-center justify-center">
+            <button className="w-full sm:w-[138px] h-[30px] rounded-[13.93px] bg-[#222222] text-white font-semibold flex items-center justify-center">
               <SlActionUndo className="text-[20px] mr-2" />
               Retornar
             </button>
-            <button onClick={handleAgendar} className="w-full sm:w-[166.15px] h-[55.03px] rounded-[13.93px] bg-[#869FBB] text-white font-semibold">
+            <button onClick={handleAgendar} className="w-full sm:w-[138px] h-[30px] rounded-[13.93px] bg-[#869FBB] text-white font-semibold">
               Agendar
             </button>
           </div>
