@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Page from "./agendar-consulta/page";
+import Cadastro from "./cadastro-medico/page";
 
 
 export default function Home() {
@@ -20,8 +21,10 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex">
+    <main>
       <Page />
+      <Cadastro />
+
     </main>
   );
 }
