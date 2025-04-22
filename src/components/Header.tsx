@@ -1,8 +1,10 @@
 'use client'
+
 import Link from "next/link";
 import { useState } from "react";
 import IconMenu from "../../public/assets/icon-botao-menu.png"
 import Image from "next/image";
+import MenuLateral from "./MenuLateral";
 
 export default function Header() {
   const[open, setOpen] = useState(false);
@@ -13,12 +15,29 @@ export default function Header() {
     setOpen(prev => !prev);
   }
   
-  const menuLateral = () => {
+  const mostrarMenuLateral = () => {
     setOpenMenu(prev => !prev);
   }
 
   return (
     <header className="text-[#1F4153] text-[18px] font-[500] flex flex-row items-center justify-between mx-8 my-6">
+      <div className="md:hidden">
+        <button 
+          onClick={mostrarMenuLateral}
+        >
+          <Image 
+            className="w-[20px] sm:w-[30px]"
+            alt=""
+            src={IconMenu}
+            width={30} height={30}
+          />
+        </button>
+      </div>
+      { openMenu && 
+        <MenuLateral 
+          active={setOpenMenu}
+        />
+      }
       <p>Nome do Sistema</p>
       <div className="hidden md:flex flex-row items-center gap-10 relative md:text-[15px]">
         <Link href="/menu-principal">Início</Link>
@@ -33,19 +52,7 @@ export default function Header() {
         </div>
         <Link href="">Agendamentos</Link>
         <Link href="">Consultas</Link>
-        <button>Sair</button>
-      </div>
-      <div className="md:hidden">
-        <button 
-          onClick={menuLateral}
-        >
-          <Image 
-            className="w-[20px] sm:w-[30px]"
-            alt=""
-            src={IconMenu}
-            width={30} height={30}
-          />
-        </button>
+        <button className="text-[#a83f3f] border border-[#a83f3f] p-0.5 px-4 rounded-md">Sair</button>
       </div>
     </header>
   );
