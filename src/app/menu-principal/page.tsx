@@ -4,7 +4,7 @@ import IconUser from "../../../public/assets/icon-usuario.png";
 import IconGrupo from "../../../public/assets/icon-grupo.png";
 import CardMenu from "../../components/Menu/MenuCard";
 
-export default function(){
+export default function MenuPrincipal(){
   return(
     <>
       <main className="bg-[#FFFFFF] text-[ubuntu] border border-[#C8C8C8] rounded-md mx-3 sm:mx-10 my-10">
@@ -24,7 +24,7 @@ export default function(){
           label="Pacientes Cadastrados"
         />
         <CardMenu
-          href="" 
+          href="/medicos-cadastrados" 
           icon={IconGrupo} 
           label="Medicos Cadastrados"
         />

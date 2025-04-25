@@ -6,7 +6,7 @@ import './globals.css'
 import {cn} from '@/lib/utils'
 import Header from '@/components/Header';
 
-const fontUbuntu = Poppins({
+const fontPoppins = Poppins({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
 })
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={cn(
         "min-h-screen",
-        fontUbuntu.className
+        fontPoppins.className
         )}>
           <Header />
           {children}
