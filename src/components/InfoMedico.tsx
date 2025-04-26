@@ -11,6 +11,13 @@ type InfoMedicoProps = {
   foto?: any;
 }
 
+function formatacaoCelular(celular: string){
+  const digitos = celular.replace(/\D/g, '').slice(0, 11);
+  const formatado = digitos.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+
+  return formatado;
+}
+
 export default function InfoMedico({nome, especialidade, email, celular} : InfoMedicoProps){
   return(
     <>
@@ -21,7 +28,7 @@ export default function InfoMedico({nome, especialidade, email, celular} : InfoM
             src={}
             width={} height={}
           /> */}
-          <p className="text-[#0D4077] text-[18px] font-[700]">{nome}</p>
+          <p className="text-[#0D4077] text-[16px] font-[700]">{nome}</p>
         </div>
         <Image
           alt="linha"
@@ -40,7 +47,7 @@ export default function InfoMedico({nome, especialidade, email, celular} : InfoM
           src={Linha}
           className="h-[full]"
         />
-        <p>{celular}</p>
+        <p>{formatacaoCelular(celular)}</p>
         <div className="flex flex-row gap-5">
           <button
           >
