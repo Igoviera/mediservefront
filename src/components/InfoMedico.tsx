@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Lapis from "../../public/assets/icon-lapis.png"
 import Lixeira from "../../public/assets/icon-lixeira.png";
-import Linha from "../../public/assets/linha.png";
 
 type InfoMedicoProps = {
   nome: string;
@@ -21,40 +20,25 @@ function formatacaoCelular(celular: string){
 export default function InfoMedico({nome, especialidade, email, celular} : InfoMedicoProps){
   return(
     <>
-      <div className="h-[4rem] bg-[#D9D9D9] flex flex-row justify-between items-center border-none rounded-lg gap-5 mx-10 my-5 px-5">
+      <div className="h-[4rem] bg-[#D9D9D9] flex flex-row flex-wrap justify-evenly md:justify-between items-center border-none rounded-lg gap-2 md:gap-5 mx-2 md:mx-10 my-5 px-2 md:px-5">
         <div>
           {/* <Image
             alt=""
             src={}
             width={} height={}
           /> */}
-          <p className="text-[#0D4077] text-[16px] font-[700]">{nome}</p>
+          <p className="text-[#0D4077] text-[15px] md:[18px] font-[700]">{nome}</p>
         </div>
-        <Image
-          alt="linha"
-          src={Linha}
-          className="h-[full]"
-        />
-        <p className="font-[500]">{especialidade}</p>
-        <Image
-          alt="linha"
-          src={Linha}
-          className="h-[full]"
-        />
-        <p>{email}</p>
-        <Image
-          alt="linha"
-          src={Linha}
-          className="h-[full]"
-        />
-        <p>{formatacaoCelular(celular)}</p>
-        <div className="flex flex-row gap-5">
+        <p className="font-[500] text-[15px] md:[18px]">{especialidade}</p>
+        <p className="hidden md:block">{email}</p>
+        <p className="hidden lg:block">{formatacaoCelular(celular)}</p>
+        <div className="flex flex-row gap-2 md:gap-5">
           <button
           >
             <Image
               alt=""
               src={Lapis}
-              width={20} height={15}
+              className="w-[15px] md:w-[20px]"
             />
           </button>
           <button
@@ -62,7 +46,7 @@ export default function InfoMedico({nome, especialidade, email, celular} : InfoM
             <Image
               alt=""
               src={Lixeira}
-              width={20} height={15}
+              className="w-[15px] md:w-[20px]"
             />
           </button>
         </div>
