@@ -20,7 +20,7 @@ export default function Header() {
   }
 
   return (
-    <header className="text-[#1F4153]text-[18px] font-[500] flex flex-row items-center justify-between mx-8 py-6">
+    <header className="text-[#1F4153] text-[18px] font-[500] flex flex-row items-center justify-between mx-8 py-6">
       <div className="md:hidden">
         <button 
           onClick={mostrarMenuLateral}
