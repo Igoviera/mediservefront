@@ -37,7 +37,7 @@ export default function MedicosCadastrados(){
               <input
                 id="busca"
                 type="search"
-                className="w-[15rem] md:w-[20rem] h-[35px] border border-[#CCCCCC] rounded-[4px] mr-5"
+                className="w-[15rem] md:w-[20rem] h-[35px] border border-[#CCCCCC] rounded-[4px] mr-5 pl-2"
               />
               <button className="w-[90px] h-[35px] bg-[#0D407780] text-[#FFFFFF] mt-3 sm:mt-0 border-none rounded-[4px]">Buscar</button>
             </div>
