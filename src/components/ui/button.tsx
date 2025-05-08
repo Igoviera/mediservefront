@@ -1,20 +1,15 @@
 type Props = {
   label: string;
   onClick?: () => void;
-  size: 1 | 2 | 3;
 };
 
-export const Button = ({ label, onClick, size }: Props) => {
+export const Button = ({ label, onClick}: Props) => {
   return (
-    <div
-      onAbort={onClick}
-      className={`flex justify-center items-center cursor-pointer bg-blue-700 text-white font-bold rounded-2xl 
-        ${size == 1 && "h-14 text-lg"}
-        ${size == 2 && "h-10 text-md"}
-        ${size == 3 && "h-7 text-xs"}
-        `}
+    <button
+      onClick={onClick}
+      className='w-[8rem] h-full bg-[#0D407780] text-[#FFFFFF] border-none rounded-full p-2'
     >
       {label}
-    </div>
+    </button>
   );
 };

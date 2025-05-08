@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Input } from "../ui/input";
+import { Input } from "../ui/Input";
 import { FaRegEye } from "react-icons/fa";
 import { Button } from "../ui/button";
 
