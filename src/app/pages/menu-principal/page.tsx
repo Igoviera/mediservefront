@@ -1,8 +1,8 @@
-import IconDocumento from "../../../public/assets/icon-documento.png";
-import IconAgendamento from "../../../public/assets/icon-agendamento.png";
-import IconUser from "../../../public/assets/icon-usuario.png";
-import IconGrupo from "../../../public/assets/icon-grupo.png";
-import CardMenu from "../../components/Menu/MenuCard";
+import IconDocumento from "../../../../public/assets/icon-documento.png";
+import IconAgendamento from "../../../../public/assets/icon-agendamento.png";
+import IconUser from "../../../../public/assets/icon-usuario.png";
+import IconGrupo from "../../../../public/assets/icon-grupo.png";
+import CardMenu from "../../../components/Menu/MenuCard";
 
 export default function MenuPrincipal(){
   return(

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Users from "../../../public/assets/icon-users.png";
+import Users from "../../../../public/assets/icon-users.png";
 import InfoMedico from "@/components/InfoMedico";
 
 const MEDICOS = [
