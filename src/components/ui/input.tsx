@@ -17,7 +17,7 @@ export default function Input({placeholder, icon, password, value, onChange}:Inp
 
   return (
     <div className="flex flex-col my-5">
-      <div className="w-[300px] bg-[#E7E7E7] rounded-lg p-4 flex items-center">
+      <div className="w-full bg-[#E7E7E7] rounded-lg p-3 md:p-4 flex items-center">
         <input
           type={password && !showPassword ? "password" : "text"}
           placeholder={placeholder}
