@@ -2,6 +2,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Page from "./agendar-consulta/page";
 import Cadastro from "./cadastro-medico/page";
+import Cadastrados from "./medicos-cadastrados/page";
+import Pacientes from "./pacientes/page";
+
 
 
 export default function Home() {
@@ -24,6 +27,11 @@ export default function Home() {
     <main>
       <Page />
       <Cadastro />
+      <Cadastrados />
+      <Pacientes/>
+
+
+
 
     </main>
   );

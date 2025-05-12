@@ -39,9 +39,20 @@ export default function Cadastro() {
   return (
     <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-[45.58px] font-[Poppins] mb-10 text-center">
+        <h1 className="font-bold text-[45.58px] font-[Poppins] mb-3 text-center">
           Cadastro de Médico
         </h1>
+        <button
+  className="bg-[#E6ECF2] text-[#0D407780] font-bold px-4 py-2 mb-7 rounded-full text-sm shadow hover:bg-[#d9e4ef] transition"
+  onClick={() => {
+    // Redirecionar ou exibir lista de médicos cadastrados
+    console.log('Ir para lista de médicos cadastrados');
+    // exemplo: router.push('/medicos');
+  }}
+>
+  Médicos Cadastrados
+</button>
+
 
         <div className="w-full flex flex-col items-center gap-[24px]">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
