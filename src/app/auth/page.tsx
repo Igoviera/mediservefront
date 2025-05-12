@@ -14,14 +14,33 @@ export default function Login(){
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const realizaLogin = () => {
-    if (!username || !password) {
+  const realizaLogin = async () => {
+    if(!username || !password){
       alert('Preencha todos os campos');
       return;
     }
 
-    console.log({username, password});
-    router.replace('/');
+    try{
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if(response.ok && data.success){
+        alert('Login validado');
+        router.replace('/');
+      } else {
+        alert('Usuário ou senha inválidos');
+      }
+    } catch (error){
+      console.error('Erro ao tentar logar:', error);
+      alert('Erro no login. Tente novamente mais tarde.');
+    }
   };
 
   const DADOS_INPUTS = [

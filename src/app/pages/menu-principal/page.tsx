@@ -24,7 +24,7 @@ export default function MenuPrincipal(){
           label="Pacientes Cadastrados"
         />
         <CardMenu
-          href="/medicos-cadastrados" 
+          href="/pages/medicos-cadastrados" 
           icon={IconGrupo} 
           label="Medicos Cadastrados"
         />

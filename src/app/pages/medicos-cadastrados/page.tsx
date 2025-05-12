@@ -19,7 +19,7 @@ export default function MedicosCadastrados(){
   const indexOfFirstMedico = indexOfLastMedico - itemsPerPage;
   const currentMedicos = MEDICOS.slice(indexOfFirstMedico, indexOfLastMedico);
 
-  return (
+  return(
     <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
