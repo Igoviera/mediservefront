@@ -53,8 +53,18 @@ export default function Header() {
           <button onClick={menuDropdown}>Cadastrar</button>
           {open && (
             <div className="absolute right-[-50px] mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-              <Link href="" className="block px-4 py-2 text-sm hover:bg-gray-100">Paciente</Link>
-              <Link href="" className="block px-4 py-2 text-sm hover:bg-gray-100">Médico</Link>
+              <Link 
+                href="/pages/cadastro-medico" 
+                className="block px-4 py-2 text-sm hover:bg-gray-100"
+              >
+                Paciente
+              </Link>
+              <Link 
+                href=""
+                className="block px-4 py-2 text-sm hover:bg-gray-100"
+              >
+                Médico
+              </Link>
             </div>
           )}
         </div>

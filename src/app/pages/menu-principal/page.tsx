@@ -9,7 +9,7 @@ export default function MenuPrincipal(){
     <>
       <main className="bg-[#FFFFFF] text-[ubuntu] border border-[#C8C8C8] rounded-md mx-3 sm:mx-10 my-10">
         <CardMenu
-          href="" 
+          href="/pages/agendar-consulta" 
           icon={IconAgendamento} 
           label="Agendar Consultas"
         />
@@ -29,7 +29,7 @@ export default function MenuPrincipal(){
           label="Medicos Cadastrados"
         />
         <CardMenu
-          href="" 
+          href="/pages/cadastro-medico" 
           icon={IconUser} 
           label="Cadastrar Médico"
         />
