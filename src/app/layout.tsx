@@ -1,11 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Ubuntu } from 'next/font/google';
-
+import { Poppins } from 'next/font/google';
 import './globals.css'
 import {cn} from '@/lib/utils'
 
-const fontUbuntu = Ubuntu({
+const fontPoppins = Poppins({
   weight: ['300', '400', '500', '700'],
   subsets: ['latin'],
 })
@@ -20,12 +18,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
+  return(
     <html lang="pt-br">
       <body className={cn(
         "min-h-screen",
-        fontUbuntu.className
-        )}>{children}</body>
+        fontPoppins.className
+        )}>
+          {children}
+        </body>
     </html>
-  )
+  );
 }
