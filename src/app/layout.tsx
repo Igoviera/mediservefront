@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import { Poppins } from 'next/font/google';
-
 import './globals.css'
 import {cn} from '@/lib/utils'
-import Header from '@/components/Header';
 
 const fontPoppins = Poppins({
   weight: ['300', '400', '500', '700'],
@@ -21,15 +18,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  return (
+  return(
     <html lang="pt-br">
       <body className={cn(
         "min-h-screen",
         fontPoppins.className
         )}>
-          <Header />
           {children}
         </body>
     </html>
-  )
+  );
 }

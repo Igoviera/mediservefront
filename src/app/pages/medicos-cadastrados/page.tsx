@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Users from "../../../public/assets/icon-users.png";
+import Users from "../../../../public/assets/icon-users.png";
 import InfoMedico from "@/components/InfoMedico";
 
 const MEDICOS = [
@@ -19,7 +19,7 @@ export default function MedicosCadastrados(){
   const indexOfFirstMedico = indexOfLastMedico - itemsPerPage;
   const currentMedicos = MEDICOS.slice(indexOfFirstMedico, indexOfLastMedico);
 
-  return (
+  return(
     <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
@@ -37,7 +37,7 @@ export default function MedicosCadastrados(){
               <input
                 id="busca"
                 type="search"
-                className="w-[15rem] md:w-[20rem] h-[35px] border border-[#CCCCCC] rounded-[4px] mr-5"
+                className="w-[15rem] md:w-[20rem] h-[35px] border border-[#CCCCCC] rounded-[4px] mr-5 pl-2"
               />
               <button className="w-[90px] h-[35px] bg-[#0D407780] text-[#FFFFFF] mt-3 sm:mt-0 border-none rounded-[4px]">Buscar</button>
             </div>

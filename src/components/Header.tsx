@@ -5,6 +5,7 @@ import { useState } from "react";
 import IconMenu from "../../public/assets/icon-botao-menu.png"
 import Image from "next/image";
 import MenuLateral from "./MenuLateral";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const[open, setOpen] = useState(false);
@@ -17,6 +18,13 @@ export default function Header() {
   
   const mostrarMenuLateral = () => {
     setOpenMenu(prev => !prev);
+  }
+
+  const router = useRouter();
+
+  const botaoLogout = () => {
+    localStorage.clear();
+    router.push('/auth');
   }
 
   return (
@@ -40,7 +48,7 @@ export default function Header() {
       }
       <p>Nome do Sistema</p>
       <div className="hidden md:flex flex-row items-center gap-10 relative md:text-[15px]">
-        <Link href="/menu-principal">Início</Link>
+        <Link href="/pages/menu-principal">Início</Link>
         <div className="relative">
           <button onClick={menuDropdown}>Cadastrar</button>
           {open && (
@@ -52,7 +60,12 @@ export default function Header() {
         </div>
         <Link href="">Agendamentos</Link>
         <Link href="">Consultas</Link>
-        <button className="text-[#a83f3f] border border-[#a83f3f] p-0.5 px-4 rounded-md">Sair</button>
+        <button 
+          onClick={botaoLogout}
+          className="text-[#a83f3f] border border-[#a83f3f] p-0.5 px-4 rounded-md hover:bg-[#a83f3f] hover:text-[#ffffff] transition duration-500 ease-in-out"
+        >
+          Sair
+        </button>
       </div>
     </header>
   );
