@@ -14,7 +14,7 @@ const Input = ({ label, ...props }: InputProps) => {
       )}
       <input
         {...props}
-        className="w-full bg-white border border-[#CCCCCC] rounded-[6px] px-3 py-3"
+        className="outline-2 outline-offset-2 outline-blue-500 w-full bg-white border border-[#CCCCCC] rounded-[6px] px-3 py-3"
       />
     </div>
   )

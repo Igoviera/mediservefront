@@ -46,7 +46,7 @@ export default function Header() {
           active={setOpenMenu}
         />
       }
-      <p>Nome do Sistema</p>
+      <Link href="/">Nome do Sistema</Link>
       <div className="hidden md:flex flex-row items-center gap-10 relative md:text-[15px]">
         <Link href="/pages/menu-principal">Início</Link>
         <div className="relative">

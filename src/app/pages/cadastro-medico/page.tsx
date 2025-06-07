@@ -11,12 +11,6 @@ export default function Cadastro () {
   const [rua, setRua] = useState('');
   const [cidade, setCidade] = useState('');
   const [cep, setCep] = useState('');
-
-
-
-
-
-
   return (
     <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       {/* Quadrado branco que engloba tudo */}

@@ -12,13 +12,31 @@ interface MenuCardProps {
 
 export default function MenuCard({ href, icon, label }: MenuCardProps) {
   return (
-    <section className="mx-4 sm:mx-10 my-10 px-2 sm:px-4 py-4 shadow-md border-none rounded-lg">
-      <Link href={href} className="flex flex-row justify-between items-center">
-        <div className="flex flex-row items-center gap-6">
-          <Image width={40} height={40} alt={`icon-${label}`} src={icon} />
-          <p className="text-[22px] text-[#2C5891] font-[700]">{label}</p>
+    <section className="font-bold py-4 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
+      <Link
+        href={href}
+        role="button"
+        className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 group"
+      >
+        <div className="flex items-center gap-4 sm:gap-6 text-center sm:text-left">
+          <Image
+            width={32}
+            height={32}
+            alt=""
+            src={icon}
+            aria-hidden="true"
+            className="transition duration-300 group-hover:brightness-200"
+          />
+
+          {label}
         </div>
-        <Image width={40} height={40} alt="icon-flecha" src={IconFlecha} />
+        <Image
+          width={24}
+          height={24}
+          alt="Ir para página"
+          src={IconFlecha}
+          className="hidden sm:block transition duration-300 group-hover:brightness-200"
+        />
       </Link>
     </section>
   );
