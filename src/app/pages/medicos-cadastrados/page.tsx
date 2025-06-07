@@ -6,6 +6,7 @@ import InfoMedico from "@/components/InfoMedico";
 import { useEffect, useState } from "react";
 import doctorService from "@/services/doctorService";
 import { Doctor } from "@/types/Doctor";
+import { Loading } from "@/components/ui/loading";
 
 const MEDICOS = [
   {
@@ -28,7 +29,6 @@ const MEDICOS = [
   },
 ];
 
-
 export default function MedicosCadastrados() {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -44,13 +44,13 @@ export default function MedicosCadastrados() {
         const doctors = await doctorService.getAllDoctors();
         setDoctors(doctors);
       } catch (error) {
-         console.error('Erro ao buscar médicos:', error);
+        console.error("Erro ao buscar médicos:", error);
       }
     };
     fetchDoctors();
   }, []);
 
-  return(
+  return (
     <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
@@ -79,22 +79,26 @@ export default function MedicosCadastrados() {
         <p className="text-[20px] font-[500] ml-0 md:ml-5 my-7 text-center md:text-left">
           Médicos:
         </p>
-        <div>
-          {doctors.map((medico) => (
-            <InfoMedico
-              key={medico.id}
-              id={medico.id}
-              nome={medico.name}
-              imgUrl={medico.imgUrl}
-              crm={medico.crm}
-              queryValue={medico.queryValue}
-              especialidade={medico.specialties[0]} // pegando a primeira especialidade
-              clinicId={medico.clinicId}
-              userId={medico.userId}
-              status={medico.status}
-            />
-          ))}
-        </div>
+        {doctors.length == 0 ? (
+          <Loading/>
+        ) : (
+          <div>
+            {doctors.map((medico) => (
+              <InfoMedico
+                key={medico.id}
+                id={medico.id}
+                nome={medico.name}
+                imgUrl={medico.imgUrl}
+                crm={medico.crm}
+                queryValue={medico.queryValue}
+                especialidade={medico.specialties[0]} // pegando a primeira especialidade
+                clinicId={medico.clinicId}
+                userId={medico.userId}
+                status={medico.status}
+              />
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

@@ -51,7 +51,7 @@ export default function InfoMedico({
 
       <p className="text-sm md:text-base text-gray-800">
         <span className="font-semibold">Status:</span>
-        <span className={`px-2 rounded-md ml-4 font-medium text-white ${
+        <span className={`px-5 rounded-full ml-4 font-medium text-white ${
           status == 'INATIVO'? 'bg-red-500':'bg-green-400'
         }`}>
           {status.toLocaleLowerCase()}
