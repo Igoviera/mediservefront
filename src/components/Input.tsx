@@ -1,31 +1,35 @@
-import React from 'react';
+import React from "react";
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+type InputProps = {
   label?: string;
-  error?: string; //adicionando prop 'error'
-}
+  error?: string;
+  id?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>;
 
-const Input = ({ label, error, ...props }: InputProps) => {
-  return (
-    <div className="flex flex-col w-full">
-      {label && (
-        <label className="mb-1 text-[14px] leading-[14px]">
-          {label}
-        </label>
-      )}
-      <input
-        {...props}
-        className={`w-full bg-white border ${
-          error ? 'border-red-500' : 'border-[#CCCCCC]'
-        } rounded-[6px] px-2 py-2`}
-      />
-      {error && (
-        <span className="text-red-500 text-xs mt-1">
-          {error}
-        </span>
-      )}
-    </div>
-  );
-};
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ label, error, id, ...props }, ref) => {
+    return (
+      <div className="w-full">
+        {label && (
+          <label htmlFor={id} className="mb-1 text-[14px] leading-[14px]">
+            {label}
+          </label>
+        )}
+        <input
+          id={id}
+          ref={ref}
+          {...props}
+          className={`w-full bg-white border ${
+            error ? "border-red-500" : "border-[#CCCCCC]"
+          } rounded-[6px] px-2 py-2`}
+        />
+        {error && <span className="text-red-500 text-xs mt-1">{error}</span>}
+      </div>
+    );
+  }
+);
+
+// necessário para evitar erro no React DevTools
+Input.displayName = "Input";
 
 export default Input;

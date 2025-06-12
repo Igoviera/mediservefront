@@ -1,4 +1,4 @@
-interface DadosCadastro {
+export interface DadosCadastro {
     nome: string;
     crm: string;
     especialidade: string;

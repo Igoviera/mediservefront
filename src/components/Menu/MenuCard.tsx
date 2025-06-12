@@ -18,7 +18,7 @@ export default function MenuCard({ href, icon, label }: MenuCardProps) {
           <Image width={40} height={40} alt={`icon-${label}`} src={icon} />
           <p className="text-[22px] text-[#2C5891] font-[700]">{label}</p>
         </div>
-        <Image width={40} height={40} alt="icon-flecha" src={IconFlecha} />
+        <Image width={40} height={40} alt="icon-flecha" src={IconFlecha}/>
       </Link>
     </section>
   );
