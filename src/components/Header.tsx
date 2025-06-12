@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import IconMenu from "../../public/assets/icon-botao-menu.png"
 import Image from "next/image";
 import MenuLateral from "./MenuLateral";
 import { useRouter } from "next/navigation";
@@ -36,7 +35,7 @@ export default function Header() {
           <Image 
             className="w-[20px] sm:w-[30px]"
             alt=""
-            src={IconMenu}
+            src='/assets/icon-botao-menu.png'
             width={30} height={30}
           />
         </button>

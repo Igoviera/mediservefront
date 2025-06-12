@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Users from "../../../../public/assets/icon-users.png";
 import InfoMedico from "@/components/InfoMedico";
 import { useEffect, useState } from "react";
 import doctorService from "@/services/doctorService";
@@ -55,7 +54,11 @@ export default function MedicosCadastrados() {
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
           <p className="text-center text-[25px] font-[700]">Médicos</p>
-          <Image alt="seta" src={Users} className="w-7 h-full ml-2 relative" />
+          <Image 
+            alt="seta" 
+            src='/assets/icons/icon-users.png' 
+            className="w-7 h-full ml-2 relative" 
+          />
         </div>
         <div className="flex flex-row justify-center flex-wrap items-center mx-3 md:my-6 md:mr-10 md:justify-end">
           <div className="flex flex-col">

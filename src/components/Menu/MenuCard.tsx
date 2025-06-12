@@ -2,11 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import IconFlecha from "../../../public/assets/icon-flecha.svg";
-
 interface MenuCardProps {
   href: string;
-  icon: any;
+  icon: string;
   label: string;
 }
 
@@ -23,7 +21,7 @@ export default function MenuCard({ href, icon, label }: MenuCardProps) {
             width={32}
             height={32}
             alt=""
-            src={icon}
+            src='/assets/icons/icon-flecha.svg'
             aria-hidden="true"
             className="transition duration-300 group-hover:brightness-200"
           />
@@ -34,7 +32,7 @@ export default function MenuCard({ href, icon, label }: MenuCardProps) {
           width={24}
           height={24}
           alt="Ir para página"
-          src={IconFlecha}
+          src={icon}
           className="hidden sm:block transition duration-300 group-hover:brightness-200"
         />
       </Link>

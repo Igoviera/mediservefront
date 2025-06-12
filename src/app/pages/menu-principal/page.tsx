@@ -1,8 +1,4 @@
-import IconDocumento from "../../../../public/assets/icon-documento.png";
-import IconAgendamento from "../../../../public/assets/icon-agendamento.png";
-import IconUser from "../../../../public/assets/icon-usuario.png";
-import IconGrupo from "../../../../public/assets/icon-grupo.png";
-import CardMenu from "../../../components/Menu/MenuCard";
+import CardMenu from "@/components/Menu/MenuCard";
 
 export default function MenuPrincipal() {
   return (
@@ -10,30 +6,42 @@ export default function MenuPrincipal() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <CardMenu
           href="/pages/agendar-consulta"
-          icon={IconAgendamento}
+          icon='/assets/icons/icon-agendamento.png'
           label="Agendar Consultas"
         />
-        <CardMenu href="" icon={IconDocumento} label="Consultas Agendadas" />
+        <CardMenu 
+          href="" 
+          icon='/assets/icons/icon-documento.png' 
+          label="Consultas Agendadas" 
+        />
         <CardMenu
           href="/pages/cadastro-medico"
-          icon={IconUser}
+          icon='/assets/icons/icon-usuario.png'
           label="Cadastrar Médico"
         />
         <CardMenu
           href="/pages/medicos-cadastrados"
-          icon={IconGrupo}
+          icon='/assets/icons/icon-grupo.png'
           label="Médicos Cadastrados"
         />
-        <CardMenu href="" icon={IconUser} label="Cadastrar Paciente" />
-        <CardMenu href="" icon={IconGrupo} label="Pacientes Cadastrados" />
+        <CardMenu 
+          href="" 
+          icon='/assets/icons/icon-usuario.png' 
+          label="Cadastrar Paciente" 
+        />
+        <CardMenu 
+          href="" 
+          icon='/assets/icons/icon-grupo.png' 
+          label="Pacientes Cadastrados" 
+        />
         <CardMenu
           href="/pages/cadastrar-usuarios"
-          icon={IconUser}
+          icon='/assets/icons/icon-usuario.png'
           label="Cadastrar Usuários"
         />
         <CardMenu
           href="/pages/usuarios-cadastrados"
-          icon={IconGrupo}
+          icon='/assets/icons/icon-grupo.png'
           label="Usuários Cadastrados"
         />
       </div>
