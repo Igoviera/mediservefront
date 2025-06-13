@@ -22,7 +22,7 @@ export const opcoesMenu = [
   {
     label: "Cadastrar Paciente",
     icon: "/assets/icons/icon-usuario.png",
-    href: "",
+    href: "/pages/cadastro-paciente",
   },
   {
     label: "Pacientes Cadastrados",
