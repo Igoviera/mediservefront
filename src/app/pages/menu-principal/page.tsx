@@ -25,7 +25,7 @@ export default function MenuPrincipal() {
           label="Médicos Cadastrados"
         />
         <CardMenu 
-          href="" 
+          href="/pages/cadastro-paciente" 
           icon='/assets/icons/icon-usuario.png' 
           label="Cadastrar Paciente" 
         />
