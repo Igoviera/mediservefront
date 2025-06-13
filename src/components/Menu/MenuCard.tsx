@@ -21,7 +21,7 @@ export default function MenuCard({ href, icon, label }: MenuCardProps) {
             width={32}
             height={32}
             alt=""
-            src='/assets/icons/icon-flecha.svg'
+            src="/assets/icons/icon-flecha.svg"
             aria-hidden="true"
             className="transition duration-300 group-hover:brightness-200"
           />

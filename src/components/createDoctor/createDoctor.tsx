@@ -24,7 +24,7 @@ export default function CreateDoctor() {
       </div>
       <div className="flex justify-end">
         <div className="mt-5 w-1/5">
-          <Button size={2} label="Cadastrar" />
+          <Button label="Cadastrar" />
         </div>
       </div>
     </div>

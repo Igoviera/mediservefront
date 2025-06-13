@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Lapis from "../../public/assets/icon-lapis.png";
-import Lixeira from "../../public/assets/icon-lixeira.png";
+import Lapis from "../../public/assets/icons/icon-lapis.png";
+import Lixeira from "../../public/assets/icons/icon-lixeira.png";
 
 type InfoMedicoProps = {
   id?: number;
@@ -31,7 +31,7 @@ export default function InfoMedico({
   queryValue,
   especialidade,
   status,
-  roles
+  roles,
 }: InfoMedicoProps) {
   return (
     <div className="bg-gray-200 rounded-xl px-6 py-4 mx-4 my-2 flex justify-between items-center shadow-sm">
@@ -43,7 +43,8 @@ export default function InfoMedico({
         )}
         {roles && (
           <p className="text-sm md:text-base text-gray-800">
-              <span className="font-semibold text-[#0D4077]">Perfil:</span> {roles}
+            <span className="font-semibold text-[#0D4077]">Perfil:</span>{" "}
+            {roles}
           </p>
         )}
         {especialidade && (
@@ -70,11 +71,14 @@ export default function InfoMedico({
         <p className="text-sm md:text-base text-gray-800">
           <span className="font-semibold">Status:</span>
           <span
-            className={`px-5 rounded-full ml-4 font-medium text-white ${
-              status == "INATIVO" ? "bg-red-400 text-red-800" : "bg-green-300 text-green-700"
+            className={`px-5 rounded-full ml-4 font-medium ${
+              status == "INATIVO"
+                ? "bg-red-400 text-red-800"
+                : "bg-green-300 text-green-700"
             }`}
           >
-            {status.charAt(0).toUpperCase() + status.slice(1).toLocaleLowerCase()}
+            {status.charAt(0).toUpperCase() +
+              status.slice(1).toLocaleLowerCase()}
           </span>
         </p>
       )}
