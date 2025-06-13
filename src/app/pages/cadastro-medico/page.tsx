@@ -8,37 +8,81 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const schema = z.object({
-  name: z.string().min(2, "Nome é obrigatório").max(20),
-  imgUrl: z.string().url("URL da imagem inválida"),
-  crm: z.string().min(6, "CRM deve conter no mínimo 6 caracteres").max(6),
+  name: z
+    .string()
+    .min(2, "O nome é obrigatório e deve ter no mínimo 2 caracteres.")
+    .max(50, "O nome deve ter no máximo 50 caracteres."),
+
+  imgUrl: z.string().url("URL da imagem inválida").optional(),
+  crm: z
+    .string()
+    .min(6, "O CRM deve conter exatamente 6 dígitos.")
+    .regex(/^\d+$/, "O CRM deve conter apenas números.")
+    .nonempty("O CRM é obrigatório."),
   cpf: z
     .string()
     .length(11, "CPF deve conter 11 dígitos")
-    .regex(/^\d+$/, "CPF deve conter apenas números"),
+    .regex(/^\d+$/, "CPF deve conter apenas números")
+    .nonempty("O CPF é obrigatório."),
   phone: z
     .string()
     .min(14, "Telefone deve ter o formato (XX) XXXXX-XXXX")
-    .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/, "Formato de telefone inválido"),
+    .regex(/^\(\d{2}\)\s\d{5}-\d{4}$/, "Formato de telefone inválido")
+    .nonempty("O telefone é obrigatório."),
   description: z
     .string()
     .min(10, "Descrição é obrigatória e deve ter no mínimo 10 caracteres")
-    .max(200),
+    .max(200, "A descrição deve ter no máximo 200 caracteres."),
   queryValue: z
     .number({ invalid_type_error: "Valor da consulta deve ser numérico" })
-    .positive("Valor da consulta deve ser maior que zero"),
+    .positive("Valor da consulta deve ser maior que zero")
+    .min(0.01, "O valor da consulta deve ser no mínimo R$ 0,01."),
   address: z.object({
     cep: z
       .string()
-      .regex(/^\d{5}-\d{3}$/, "CEP deve estar no formato 00000-000"),
-    logradouro: z.string().min(3, "Logradouro é obrigatório"),
-    locationNumber: z.string().min(1, "Número do local é obrigatório"),
-    neighborhood: z.string().min(3, "Bairro é obrigatório"),
-    city: z.string().min(2, "Cidade é obrigatória"),
-    uf: z.string().length(2, "UF deve ter 2 letras").toUpperCase(),
+      .regex(/^\d{5}-\d{3}$/, "CEP deve estar no formato 00000-000")
+      .nonempty("O CEP é obrigatório."),
+    logradouro: z
+      .string()
+      .min(2, "O logradouro é obrigatório e deve ter no mínimo 2 caracteres.")
+      .nonempty("O logradouro é obrigatório."),
+    locationNumber: z
+      .string()
+      .min(1, "Número do local é obrigatório")
+      .nonempty("O número do local é obrigatório."),
+    neighborhood: z
+      .string()
+      .min(2, "Bairro é obrigatório e deve ter no mínimo 3 caracteres.")
+      .nonempty("O bairro é obrigatório."),
+    city: z
+      .string()
+      .min(2, "A cidade é obrigatória e deve ter no mínimo 2 caracteres.")
+      .nonempty("A cidade é obrigatória."),
+    uf: z
+      .string()
+      .length(2, "UF deve ter 2 letras")
+      .toUpperCase()
+      .nonempty("A UF é obrigatória."),
   }),
   specialtyIds: z
     .array(z.number())
-    .min(1, "Selecione pelo menos uma especialidade"),
+    .min(1, "Selecione pelo menos uma especialidade")
+    .nonempty("Selecione pelo menos uma especialidade."),
+  user: z.object({
+    username: z
+      .string()
+      .min(2, "O username é obrigatório deve ter no mínimo 2 caracteres.")
+      .max(50, "O username deve ter no máximo 50 caracteres.")
+      .nonempty("O username é obrigatório."),
+    email: z
+      .string()
+      .email("O e-mail é inválido. Digite um e-mail válido.")
+      .nonempty("O e-mail é obrigatório."),
+    password: z
+      .string()
+      .min(6, "A senha deve ter no mínimo 8 caracteres.")
+      .nonempty("A senha é obrigatória."),
+  }),
 });
 
 type DoctorFormData = z.infer<typeof schema>;
@@ -67,28 +111,41 @@ export default function Cadastro() {
   return (
     <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-2xl mb-3 text-center">
+        <h1 className="font-bold text-2xl mb-10 text-center">
           Cadastro de Médico
         </h1>
-        <button
-          className="bg-[#E6ECF2] text-[#0D407780] font-bold px-4 py-2 mb-7 rounded-full text-sm shadow hover:bg-[#d9e4ef] transition"
-          onClick={() => {
-            // Redirecionar ou exibir lista de médicos cadastrados
-            console.log("Ir para lista de médicos cadastrados");
-            // exemplo: router.push('/medicos');
-          }}
-        >
-          Médicos Cadastrados
-        </button>
-
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full flex flex-col items-center gap-[24px]">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
               <Input
+                id="username"
+                type="text"
+                placeholder="Username"
+                label="Username:"
+                {...register("user.username")}
+                error={errors.user?.username?.message}
+              />
+              <Input
+                id="email"
+                type="email"
+                placeholder="Digite seu e-mail"
+                label="E-mail:"
+                {...register("user.email")}
+                error={errors.user?.email?.message}
+              />
+              <Input
+                id="password"
+                type="password"
+                placeholder="Digite uma senha"
+                label="Senha:"
+                {...register("user.password")}
+                error={errors.user?.password?.message}
+              />
+              <Input
                 id="name"
                 type="text"
                 placeholder="Nome Completo"
-                label="Nome:"
+                label="Nome completo:"
                 {...register("name")}
                 error={errors.name?.message}
               />
