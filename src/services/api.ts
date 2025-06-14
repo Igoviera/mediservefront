@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const apiProducao = 'https://apimediserve.onrender.com';
+const apiDesenvolvimento = 'http://localhost:8080'
+
 const api = axios.create({
-    baseURL:'https://apimediserve.onrender.com'
+    baseURL: apiDesenvolvimento
 })
 
 export default api;

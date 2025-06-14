@@ -14,6 +14,11 @@ export default function MenuPrincipal() {
           icon='/assets/icons/icon-documento.png' 
           label="Consultas Agendadas" 
         />
+        <CardMenu 
+          href="/pages/cadastrar-especialidade" 
+          icon='/assets/icons/icon-documento.png' 
+          label="Cadastrar Especialidade" 
+        />
         <CardMenu
           href="/pages/cadastro-medico"
           icon='/assets/icons/icon-usuario.png'
