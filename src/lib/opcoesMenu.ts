@@ -10,6 +10,11 @@ export const opcoesMenu = [
     href: "",
   },
   {
+    label : "Cadastrar Especialidade" ,
+    icon : '/assets/icons/icon-documento.png',
+    href : "/pages/cadastrar-especialidade" ,
+  },
+  {
     label: "Cadastrar Médico",
     icon: "/assets/icons/icon-usuario.png",
     href: "/pages/cadastro-medico",
