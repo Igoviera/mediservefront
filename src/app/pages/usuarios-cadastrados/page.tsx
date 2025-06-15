@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Users from "../../../../public/assets/icon-users.png";
+import Users from "../../../../public/assets/icons/icon-users.png";
 import InfoMedico from "@/components/InfoMedico";
 import { useEffect, useState } from "react";
 import doctorService from "@/services/doctorService";
@@ -48,7 +48,7 @@ export default function MedicosCadastrados() {
   }, []);
 
   return (
-    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
+    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10 w-screen">
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
           <p className="text-center text-[25px] font-[700]">Usúarios</p>
