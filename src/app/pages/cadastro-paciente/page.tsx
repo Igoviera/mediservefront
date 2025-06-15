@@ -82,7 +82,7 @@ export default function CadastroPaciente() {
 
 
   return (
-    <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
+    <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
         <h1 className="font-bold text-2xl mb-10 text-center">
           Cadastro de Paciente
