@@ -44,4 +44,9 @@ export const opcoesMenu = [
     icon: "/assets/icons/icon-grupo.png",
     href: "/pages/usuarios-cadastrados",
   },
+    {
+    label: "Dasboard",
+    icon: "/assets/icons/icon-documento.png",
+    href: "/pages/dashboard",
+  },
 ];
