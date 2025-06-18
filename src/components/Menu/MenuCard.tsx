@@ -10,7 +10,7 @@ interface MenuCardProps {
 
 export default function MenuCard({ href, icon, label }: MenuCardProps) {
   return (
-    <section className="font-bold py-4 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
+    <div className="font-bold py-4 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
       <Link
         href={href}
         role="button"
@@ -36,6 +36,6 @@ export default function MenuCard({ href, icon, label }: MenuCardProps) {
           className="hidden sm:block transition duration-300 group-hover:brightness-200"
         />
       </Link>
-    </section>
+    </div>
   );
 }

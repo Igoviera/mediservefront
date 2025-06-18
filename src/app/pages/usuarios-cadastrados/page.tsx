@@ -2,49 +2,29 @@
 
 import Image from "next/image";
 import Users from "../../../../public/assets/icons/icon-users.png";
-import InfoMedico from "@/components/InfoMedico";
+import InfoMedico from "@/components/InfoPessoa";
 import { useEffect, useState } from "react";
 import doctorService from "@/services/doctorService";
-import { Doctor } from "@/types/Doctor";
 import { Loading } from "@/components/ui/loading";
-
-const usuarios = [
-  {
-    id: 1,
-    username: "Lígia Kaylanne",
-    email: "ligia@gmail.com",
-    password: "123456",
-    roles: "ADMIN",
-    status:"ATIVO"
-  },
-  {
-    id: 2,
-    username: "Camila",
-    email: "camila@gmail.com",
-    password: "123456",
-    roles: "MEDICO",
-    status:"INATIVO"
-  },
-];
+import { DataTable } from "@/components/ui/data-table";
+import { User, usuarioColumns } from "@/components/colmuns/user-columns";
+import userService from "@/services/userService";
 
 export default function MedicosCadastrados() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  const indexOfLastMedico = currentPage * itemsPerPage;
-  const indexOfFirstMedico = indexOfLastMedico - itemsPerPage;
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [users, setUser] = useState<User[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchUser = async () => {
       try {
-        const doctors = await doctorService.getAllDoctors();
-        setDoctors(doctors);
+        const users = await userService.getAllUsers();
+        setUser(users);
+        setLoading(false);
       } catch (error) {
-        console.error("Erro ao buscar médicos:", error);
+        console.error("Erro ao buscar usuarios:", error);
       }
     };
-    fetchDoctors();
+    fetchUser();
   }, []);
 
   return (
@@ -76,20 +56,11 @@ export default function MedicosCadastrados() {
         <p className="text-[20px] font-[500] ml-0 md:ml-5 my-7 text-center md:text-left">
           Usúarios:
         </p>
-        {usuarios.length == 0 ? (
-          <Loading/>
+        {loading ? (
+          <Loading />
         ) : (
-          <div>
-            {usuarios.map((usuario) => (
-              <InfoMedico
-                key={usuario.id}
-                id={usuario.id}
-                nome={usuario.username}
-                email={usuario.email}
-                roles={usuario.roles}
-                status={usuario.status}
-              />
-            ))}
+          <div className="m-5">
+            <DataTable columns={usuarioColumns} data={users} />
           </div>
         )}
       </section>

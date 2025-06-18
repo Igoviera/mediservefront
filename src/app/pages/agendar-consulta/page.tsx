@@ -38,9 +38,9 @@ export default function Page() {
   };
 
   return (
-    <div className="w-screen h-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
+    <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-[45.58px] font-[Poppins] mb-10 text-center">Agendar Consulta</h1>
+        <h1 className="font-bold text-2xl mb-10 text-center">Agendar Consulta</h1>
         <div className="w-full flex flex-col items-center gap-[24px]">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-[7.64px] w-full">
             <Input

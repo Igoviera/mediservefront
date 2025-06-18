@@ -1,47 +1,24 @@
 "use client";
 
 import Image from "next/image";
-import InfoMedico from "@/components/InfoMedico";
+import InfoMedico from "@/components/InfoPessoa";
 import { useEffect, useState } from "react";
 import doctorService from "@/services/doctorService";
-import { Doctor } from "@/types/Doctor";
 import { Loading } from "@/components/ui/loading";
+import { DataTable } from "@/components/ui/data-table";
+import { Doctor, medicoColumns } from "@/components/colmuns/doctor-colmns";
 
-const MEDICOS = [
-  {
-    nome: "Lígia Kaylanne",
-    especialidade: "Neurologista",
-    celular: "83987523652",
-    email: "emailexemplo@gmail.com",
-  },
-  {
-    nome: "João Costa",
-    especialidade: "Cardiologista",
-    celular: "83987523653",
-    email: "emailexemplo2@gmail.com",
-  },
-  {
-    nome: "Maria Eduarda",
-    especialidade: "Cirurgiã",
-    celular: "83987523654",
-    email: "emailexemplo3@gmail.com",
-  },
-];
 
 export default function MedicosCadastrados() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
-
-  const indexOfLastMedico = currentPage * itemsPerPage;
-  const indexOfFirstMedico = indexOfLastMedico - itemsPerPage;
-  const currentMedicos = MEDICOS.slice(indexOfFirstMedico, indexOfLastMedico);
   const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
         const doctors = await doctorService.getAllDoctors();
         setDoctors(doctors);
+         setLoading(false)
       } catch (error) {
         console.error("Erro ao buscar médicos:", error);
       }
@@ -84,25 +61,12 @@ export default function MedicosCadastrados() {
         <p className="text-[20px] font-[500] ml-0 md:ml-5 my-7 text-center md:text-left">
           Médicos:
         </p>
-        {doctors.length == 0 ? (
-          <Loading />
+        {loading ? (
+          <Loading/>
         ) : (
-          <div>
-            {doctors.map((medico) => (
-              <InfoMedico
-                key={medico.id}
-                id={medico.id}
-                nome={medico.name}
-                imgUrl={medico.imgUrl}
-                crm={medico.crm}
-                queryValue={medico.queryValue}
-                especialidade={medico.specialties[0]} // pegando a primeira especialidade
-                clinicId={medico.clinicId}
-                userId={medico.userId}
-                status={medico.status}
-              />
-            ))}
-          </div>
+          <div className="m-5">
+            <DataTable columns={medicoColumns} data={doctors} />
+          </div>  
         )}
       </section>
     </main>

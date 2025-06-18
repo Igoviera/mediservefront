@@ -1,5 +1,5 @@
+import { Doctor } from "@/components/colmuns/doctor-colmns";
 import api from "./api"
-import {Doctor} from '@/types/Doctor';
 
 const getAllDoctors = (): Promise<Doctor[]> => {
   return api
