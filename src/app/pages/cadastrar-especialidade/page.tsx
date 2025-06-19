@@ -42,7 +42,6 @@ export default function CadastroEspecialidade() {
         name: data.name,
       };
       const response = await specialtyService.creatSpecialty(newSpecialty);
-      console.log("Especialidade cadastrada com sucesso:", response);
       setSuccess(true);
       await fetchSpecialty();
       reset();
