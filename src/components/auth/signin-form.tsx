@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Input } from "../ui/Input";
+import { Input } from "../ui/MyInput";
 import { FaRegEye } from "react-icons/fa";
-import { Button } from "../ui/button";
+import { Button } from "../ui/Mybutton";
 
 export const SigninForm = () => {
   const router = useRouter();

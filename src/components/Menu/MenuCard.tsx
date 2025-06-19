@@ -10,11 +10,11 @@ interface MenuCardProps {
 
 export default function MenuCard({ href, icon, label }: MenuCardProps) {
   return (
-    <div className="font-bold py-4 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
+    <div className="font-bold py-9 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
       <Link
         href={href}
         role="button"
-        className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0 group"
+        className="flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-0"
       >
         <div className="flex items-center gap-4 sm:gap-6 text-center sm:text-left">
           <Image

@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Logo from '../../../public/assets/image-group-login.png';
-import { Button } from '@/components/ui/button';
-import Input from '@/components/ui/Input';
+import { Button } from '@/components/ui/Mybutton';
+import Input from '@/components/ui/MyInput';
 import LinhasEsq from '../../../public/assets/linhasleft.png';
 import LinhasDir from '../../../public/assets/linhasright.png';
 

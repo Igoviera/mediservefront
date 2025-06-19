@@ -1,36 +1,22 @@
-'use client'
+import * as React from "react"
 
-import { useState } from "react";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { cn } from "@/lib/utils"
 
-type InputProps = {
-  placeholder:  string;
-  password?: boolean;
-  value?: string;
-  icon?: any;
-  onChange?: any;
-  className?: string;
-}
-
-export default function Input({placeholder, icon, password, value, onChange}:InputProps){
-  const [showPassword, setShowPassword] = useState(false);
-
-  return (
-    <div className="flex flex-col my-5">
-      <div className="w-full bg-[#E7E7E7] rounded-lg p-3 md:p-4 flex items-center">
-        <input
-          type={password && !showPassword ? "password" : "text"}
-          placeholder={placeholder}
-          className="bg-transparent border-none outline-none flex-1"
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-        />
-        {password && (
-          <div onClick={() => setShowPassword(!showPassword)} className="cursor-pointer">
-            {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-          </div>
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
         )}
-      </div>
-    </div>
-  );
-}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }

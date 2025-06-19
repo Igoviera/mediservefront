@@ -1,6 +1,6 @@
 import CreateDoctor from "@/components/createDoctor/createDoctor";
 import Header from "@/components/Header";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui/Mybutton";
 import Link from "next/link";
 import MenuPrincipal from "./pages/menu-principal/page";
 

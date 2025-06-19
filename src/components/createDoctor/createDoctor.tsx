@@ -1,5 +1,5 @@
-import { Button } from "../ui/button";
-import { Input } from "../ui/Input";
+import { Button } from "../ui/Mybutton";
+import { Input } from "../ui/MyInput";
 
 export default function CreateDoctor() {
   return (
