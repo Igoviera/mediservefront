@@ -10,7 +10,7 @@ interface MenuCardProps {
 
 export default function MenuCard({ href, icon, label }: MenuCardProps) {
   return (
-    <div className="font-bold py-9 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
+    <div className="font-bold py-7 px-5 my-5 shadow-md rounded-lg transition-all duration-300 bg-white hover:bg-[#869FBB]">
       <Link
         href={href}
         role="button"
