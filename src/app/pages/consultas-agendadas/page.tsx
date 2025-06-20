@@ -1,36 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import InfoMedico from "@/components/InfoPessoa";
-import { FaUserDoctor } from "react-icons/fa6";
 import { useEffect, useState } from "react";
-import doctorService from "@/services/doctorService";
 import { Loading } from "@/components/ui/loading";
 import { DataTable } from "@/components/ui/data-table";
-import { Doctor, medicoColumns } from "@/components/colmuns/doctor-colmns";
+import { Appointment, appointmentColumns } from "@/components/colmuns/appointments-clmns";
+import appointmentsService from "@/services/appointmentsService";
+
 
 export default function MedicosCadastrados() {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [appointments, setAppointment] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDoctors = async () => {
+    const fetchAppoitment = async () => {
       try {
-        const doctors = await doctorService.getAllDoctors();
-        setDoctors(doctors);
+        const appointments = await appointmentsService.getAllAppointments();
+        setAppointment(appointments);
         setLoading(false);
       } catch (error) {
         console.error("Erro ao buscar médicos:", error);
       }
     };
-    fetchDoctors();
+    fetchAppoitment();
   }, []);
 
   return (
     <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10 w-screen">
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
-          <p className="text-center text-[25px] font-[700] text-blue-900">Médicos</p>
+          <p className="text-center text-[25px] font-[700] text-blue-900">Consultas Agendadas</p>
           <Image
             alt="seta"
             src="/assets/icons/icon-users.png"
@@ -45,7 +44,7 @@ export default function MedicosCadastrados() {
           <Loading />
         ) : (
           <div className="m-5">
-            <DataTable columns={medicoColumns} data={doctors} />
+            <DataTable columns={appointmentColumns} data={appointments} />
           </div>
         )}
       </section>

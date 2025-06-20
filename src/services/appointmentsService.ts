@@ -1,8 +1,9 @@
 import { Appointments } from "@/types/Appointments";
 import api from "./api"
+import { Appointment } from "@/components/colmuns/appointments-clmns";
 
 
-const getAllAppointments = (): Promise<Appointments[]> => {
+const getAllAppointments = (): Promise<Appointment[]> => {
   return api
     .get('/api/mediServe/appointments')
     .then((res) => res.data);

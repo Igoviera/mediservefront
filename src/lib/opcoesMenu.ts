@@ -1,3 +1,5 @@
+import { FaUserDoctor } from "react-icons/fa6";
+
 export const opcoesMenu = [
   {
     label: "Agendar Consultas",
@@ -7,7 +9,7 @@ export const opcoesMenu = [
   {
     label: "Consultas Agendadas",
     icon: "/assets/icons/icon-documento.png",
-    href: "",
+    href: "/pages/consultas-agendadas",
   },
   {
     label : "Cadastrar Especialidade" ,
@@ -35,7 +37,7 @@ export const opcoesMenu = [
     href: "/pages/pacientes",
   },
   {
-    label: "Cadastrar Usuários",
+    label: "Cadastrar Usuário",
     icon: "/assets/icons/icon-usuario.png",
     href: "/pages/cadastrar-usuarios",
   },

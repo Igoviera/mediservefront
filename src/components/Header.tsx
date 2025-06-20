@@ -27,7 +27,7 @@ export default function Header() {
   }
 
   return (
-    <header className="text-[#1F4153] text-[18px] font-[500] flex flex-row items-center justify-between px-8 py-6">
+    <header className="bg-blue-500 text-white text-[18px] font-[500] flex flex-row items-center justify-between px-8 py-6">
       <div className="md:hidden">
         <button 
           onClick={mostrarMenuLateral}
@@ -71,7 +71,7 @@ export default function Header() {
         <Link href="">Consultas</Link>
         <button 
           onClick={botaoLogout}
-          className="bg-[#869FBB] p-0.5 px-4 rounded-md hover:bg-[#4d5f73] hover:text-[#ffffff] transition duration-500 ease-in-out"
+          className="bg-white px-3 rounded-sm"
         >
           Sair
         </button>
