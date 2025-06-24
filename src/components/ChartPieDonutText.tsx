@@ -61,10 +61,9 @@ export default function ChartPieDonutText() {
 
   return (
     <div className="">
-      <h1>teste</h1>
       <ChartContainer
         config={chartConfig}
-        className="mx-auto aspect-square h-[500px]"
+        className="mx-auto aspect-square h-[300px]"
       >
         <PieChart>
           <ChartTooltip
@@ -75,8 +74,8 @@ export default function ChartPieDonutText() {
             data={chartData}
             dataKey="visitors"
             nameKey="browser"
-            innerRadius={130}
-            strokeWidth={5}
+            innerRadius={80}
+            strokeWidth={4}
           >
             <Label
               content={({ viewBox }) => {

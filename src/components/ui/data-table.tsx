@@ -71,9 +71,9 @@ export function DataTable<TData, TValue>({
 
       <div className="rounded-md border">
         <Table>
-          <TableHeader className="bg-blue-500">
+          <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow key={headerGroup.id} className="bg-blue-500 hover:bg-blue-500">
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="text-white">
                     {flexRender(

@@ -23,8 +23,7 @@ const chartData = [
 
 const AppBarChat = () => {
   return (
-    <div className="">
-      <h1 className="text-lg font-medium">Total teste</h1>
+    <div className="max-w-[500px] h-[300px]">
       <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
         <BarChart accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />

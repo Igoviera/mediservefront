@@ -15,7 +15,15 @@ const getAllSpecialty = (): Promise<Specialty[]> => {
 };
 
 
+const updateSpecialty = (id: number, specialty: Specialty) => {
+  return api
+    .put(`/api/mediServe/specialtys/${id}`,specialty)
+    .then((res) => res.data)
+}
+
+
 export default {
   getAllSpecialty,
-  creatSpecialty
+  creatSpecialty,
+  updateSpecialty
 };

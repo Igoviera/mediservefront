@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { DoctorDetailsButton } from "../doctorDetailsButton";
 
 export type Doctor = {
   id: number;
@@ -17,7 +18,7 @@ export type Doctor = {
     city: string;
     uf: string;
   };
-  specialties: number[];
+  specialties: string[];
   status: string;
   clinicId: number;
   user: {
@@ -35,13 +36,18 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
     enableColumnFilter: true,
   },
   {
-    accessorKey: "crm",
-    header: "CRM",
+    accessorKey: "specialties",
+    accessorFn: (row) => row.specialties?.join(", "),
+    header: "Especialidade",
     enableColumnFilter: true,
+    cell: ({ getValue }) => {
+      const value = getValue<string>();
+      return <span>{value}</span>;
+    },
   },
   {
-    accessorKey: "cpf",
-    header: "CPF",
+    accessorKey: "crm",
+    header: "CRM",
     enableColumnFilter: true,
   },
   {
@@ -75,13 +81,11 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
     },
   },
   {
-    accessorKey: "user.email",
-    header: "Email",
-    cell: ({ row }) => row.original.user.email,
-  },
-  {
-    accessorKey: "address.city",
-    header: "Cidade",
-    cell: ({ row }) => row.original.address.city,
+    id: "action",
+    header: "Ações",
+    cell: ({ row }) => {
+      const doctor = row.original;
+      return <DoctorDetailsButton doctor={doctor} />;
+    },
   },
 ];

@@ -8,12 +8,12 @@ export default function MenuPrincipal() {
         Painel Administrativo
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {opcoesMenu.map((opcao) => (
+        {opcoesMenu.map((item) => (
           <CardMenu
-            key={opcao.label}
-            href={opcao.href}
-            icon={opcao.icon}
-            label={opcao.label}
+            key={item.label}
+            icon={item.icon}
+            href={item.href}
+            label={item.label}
           />
         ))}
       </div>

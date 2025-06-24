@@ -12,6 +12,7 @@ import {
   Specialty,
   specialtyColumns,
 } from "@/components/colmuns/specialty-comns";
+import AlertSuccess from "@/components/AlertSuccess";
 
 const schema = z.object({
   name: z
@@ -46,7 +47,6 @@ export default function CadastroEspecialidade() {
       await fetchSpecialty();
       reset();
       setTimeout(() => setSuccess(false), 3000);
-      
     } catch (error) {
       console.error("Erro ao cadastrar especialidade:", error);
     }
@@ -95,9 +95,10 @@ export default function CadastroEspecialidade() {
           </div>
         </form>
         {success && (
-          <div className="bg-green-300 text-green-700 w-full py-4 flex justify-center items-center rounded-sm mt-3 font-semibold">
-            Especialidade salva com sucesso!
-          </div>
+          <AlertSuccess
+            message="Especialidade salva com sucesso!"
+            className="mt-4"
+          />
         )}
 
         <div className="overflow-x-auto w-full mt-5">
