@@ -1,30 +1,31 @@
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
+import {PersonDetailsButton } from "../personDetailsButton";
 
 export type Patient = {
-  id: number
-  name: string
-  cpf: string
-  phone: string
+  id: number;
+  name: string;
+  cpf: string;
+  phone: string;
   address: {
-    cep: string
-    logradouro: string
-    locationNumber: string
-    neighborhood: string
-    city: string
-    uf: string
-  }
-  status: string
-  clinicId: number
+    cep: string;
+    logradouro: string;
+    locationNumber: string;
+    neighborhood: string;
+    city: string;
+    uf: string;
+  };
+  status: string;
+  clinicId: number;
   user: {
-    id: number
-    username: string
-    email: string
-    role: string
-  }
-}
+    id: number;
+    username: string;
+    email: string;
+    role: string;
+  };
+};
 
 export const pacienteColumns: ColumnDef<Patient>[] = [
-    {
+  {
     accessorKey: "name",
     header: "Nome",
   },
@@ -46,4 +47,12 @@ export const pacienteColumns: ColumnDef<Patient>[] = [
     header: "Cidade",
     cell: ({ row }) => row.original.address.city,
   },
-]
+  {
+    id: "action",
+    header: "Ações",
+    cell: ({ row }) => {
+      const patient = row.original;
+      return <PersonDetailsButton person={patient} type="patient" />;
+    },
+  },
+];

@@ -75,12 +75,12 @@ export default function CadastroEspecialidade() {
         <form
           className="flex justify-end justify-items-center gap-2 min-w-full"
           onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="w-3/6">
+        > 
+          <div className="w-3/6">  
             <Input
               id="especialidade"
               type="text"
-              placeholder="Nome da especialidade"
+              placeholder="Nome da especialidade para cadastro"
               {...register("name")}
               error={errors.name?.message}
             />

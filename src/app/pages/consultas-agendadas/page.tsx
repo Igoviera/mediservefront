@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Loading } from "@/components/ui/loading";
 import { DataTable } from "@/components/ui/data-table";
 import { Appointment, appointmentColumns } from "@/components/colmuns/appointments-clmns";
 import appointmentsService from "@/services/appointmentsService";
+import { ClipboardList } from "lucide-react";
 
 
 export default function MedicosCadastrados() {
@@ -30,13 +30,7 @@ export default function MedicosCadastrados() {
       <section className="flex flex-col">
         <div className="w-full flex flex-row justify-center my-[4rem]">
           <p className="text-center text-[25px] font-[700] text-blue-900">Consultas Agendadas</p>
-          <Image
-            alt="seta"
-            src="/assets/icons/icon-users.png"
-            className="w-7 h-full ml-2 relative"
-            width={24}
-            height={24}
-          />
+          <ClipboardList size={30} className="text-blue-900"/>  
         </div>
       </section>
       <section>

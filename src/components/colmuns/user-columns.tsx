@@ -1,4 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
+import { PersonDetailsButton } from "../personDetailsButton";
 
 export type User = {
   id: number;
@@ -38,6 +39,14 @@ export const usuarioColumns: ColumnDef<User>[] = [
       );
     },
   },
+   {
+      id: "action",
+      header: "Ações",
+      cell: ({ row }) => {
+        const user = row.original;
+        return <PersonDetailsButton person={user} type="user" />;
+      },
+    },
   {
     accessorKey: "role",
     header: "Perfil",

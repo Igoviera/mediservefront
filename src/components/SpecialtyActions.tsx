@@ -40,7 +40,7 @@ export function SpecialtyActions({ specialty }: Props) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="ghost" size="icon">
-          <Pencil size={20} />
+          <Pencil size={20}/>
         </Button>
       </DialogTrigger>
       <DialogContent>

@@ -1,5 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { DoctorDetailsButton } from "../doctorDetailsButton";
+import {PersonDetailsButton } from "../personDetailsButton";
 
 export type Doctor = {
   id: number;
@@ -85,7 +85,7 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
     header: "Ações",
     cell: ({ row }) => {
       const doctor = row.original;
-      return <DoctorDetailsButton doctor={doctor} />;
+      return <PersonDetailsButton person={doctor} type="doctor" />;
     },
   },
 ];

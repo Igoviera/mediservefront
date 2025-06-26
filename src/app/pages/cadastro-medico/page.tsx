@@ -5,6 +5,7 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserPlus } from "lucide-react";
 
 const schema = z.object({
   name: z
@@ -110,9 +111,13 @@ export default function Cadastro() {
   return (
     <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-2xl mb-10 text-center">
-          Cadastro de Médico
-        </h1>
+        <div className="flex gap-5 text-blue-900 font-bold text-2xl mb-10">
+          <h1>
+            Cadastro de Médico
+          </h1>
+           <UserPlus size={30} />
+        </div>
+
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full flex flex-col items-center gap-[24px]">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
@@ -227,4 +232,3 @@ export default function Cadastro() {
     </div>
   );
 }
-

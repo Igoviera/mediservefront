@@ -5,6 +5,7 @@ import React from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserPlus } from "lucide-react";
 
 const schema = z.object({
   name: z
@@ -80,13 +81,13 @@ export default function CadastroPaciente() {
     console.log(data);
   };
 
-
   return (
     <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-2xl mb-10 text-center">
-          Cadastro de Paciente
-        </h1>
+        <div className="flex justify-center text-2xl text-blue-800 font-bold mt-5 mb-10 gap-2">
+          <p>Medicos Cadastrados</p>
+          <UserPlus size={30} />
+        </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="w-full flex flex-col items-center gap-[24px]">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
@@ -166,7 +167,7 @@ export default function CadastroPaciente() {
             <div className="flex justify-end w-full">
               <button
                 type="submit"
-                className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-[#869FBB] hover:bg-slate-600 text-white font-semibold flex items-center justify-center"
+                className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-blue-500 hover:bg-blue-800 text-white font-semibold flex items-center justify-center"
               >
                 Salvar
               </button>
@@ -177,4 +178,3 @@ export default function CadastroPaciente() {
     </div>
   );
 }
-
