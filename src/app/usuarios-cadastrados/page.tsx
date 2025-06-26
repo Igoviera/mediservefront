@@ -1,9 +1,6 @@
 "use client";
 
-import Image from "next/image";
-import InfoMedico from "@/components/InfoPessoa";
 import { useEffect, useState } from "react";
-import doctorService from "@/services/doctorService";
 import { Loading } from "@/components/ui/loading";
 import { DataTable } from "@/components/ui/data-table";
 import { User, usuarioColumns } from "@/components/colmuns/user-columns";

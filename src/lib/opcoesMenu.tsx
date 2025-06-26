@@ -7,7 +7,6 @@ import {
   UserPlus,
   Stethoscope,
   Users,
-  User,
   BarChart2,
 } from "lucide-react";
 import { ReactNode } from "react";
@@ -22,51 +21,51 @@ export const opcoesMenu: OpcaoMenu[] = [
   {
     label: "Agendar Consultas",
     icon: <CalendarCheck size={24} />,
-    href: "/pages/agendar-consulta",
+    href: "/agendar-consulta",
   },
   {
     label: "Consultas Agendadas",
     icon: <ClipboardList size={24} />,
-    href: "/pages/consultas-agendadas",
+    href: "/consultas-agendadas",
   },
   {
     label: "Cadastrar Especialidade",
     icon: <FileText size={24} />,
-    href: "/pages/cadastrar-especialidade",
+    href: "/cadastrar-especialidade",
   },
   {
     label: "Cadastrar Médico",
     icon: <UserPlus size={24} />,
-    href: "/pages/cadastro-medico",
+    href: "/cadastro-medico",
   },
   {
     label: "Médicos Cadastrados",
     icon: <Stethoscope size={24} />,
-    href: "/pages/medicos-cadastrados",
+    href: "/medicos-cadastrados",
   },
   {
     label: "Cadastrar Paciente",
     icon: <UserPlus size={24} />,
-    href: "/pages/cadastro-paciente",
+    href: "/cadastro-paciente",
   },
   {
     label: "Pacientes Cadastrados",
     icon: <Users size={24} />,
-    href: "/pages/pacientes",
+    href: "/pacientes",
   },
   {
     label: "Cadastrar Usuário",
     icon: <UserPlus size={24} />,
-    href: "/pages/cadastrar-usuarios",
+    href: "/cadastrar-usuarios",
   },
   {
     label: "Usuários Cadastrados",
     icon: <Users size={24} />,
-    href: "/pages/usuarios-cadastrados",
+    href: "/usuarios-cadastrados",
   },
   {
     label: "Dashboard",
     icon: <BarChart2 size={24} />,
-    href: "/pages/dashboard",
+    href: "/dashboard",
   },
 ];

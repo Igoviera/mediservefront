@@ -4,7 +4,7 @@ import { opcoesMenu } from "@/lib/opcoesMenu";
 export default function MenuPrincipal() {
   return (
     <main className="bg-white border flex flex-col justify-center items-center border-[#C8C8C8] rounded-md p-6 sm:mx-10 my-10">
-      <h1 className="py-8 text-3xl font-light text-slate-500">
+      <h1 className="py-8 text-3xl text-slate-500">
         Painel Administrativo
       </h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
