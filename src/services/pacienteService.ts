@@ -1,3 +1,4 @@
+import { PatientFormData } from "@/components/PatientForm";
 import api from "./api"
 import {Patient} from '@/types/Patient';
 
@@ -7,13 +8,20 @@ const getAllPatients = (): Promise<Patient[]> => {
     .then((res) => res.data);
 };
 
-const creatPatients = (): Promise<Patient> => {
+const creatPatients = (data:PatientFormData): Promise<Patient> => {
   return api
-    .get('/api/mediServe/patients')
+    .post('/api/mediServe/patients')
     .then((res) => res.data.content);
 };
 
+const updatePatient = (id: number, data:PatientFormData): Promise<Patient> => {
+  return api
+  .put(`/api/mediServe/patients/${id}`,data)
+  .then((res) => res.data);
+}
+
 export default {
   getAllPatients,
-  creatPatients
+  creatPatients,
+  updatePatient
 };

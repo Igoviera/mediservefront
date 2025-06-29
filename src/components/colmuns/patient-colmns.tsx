@@ -1,5 +1,6 @@
 import { ColumnDef } from "@tanstack/react-table";
-import {PersonDetailsButton } from "../personDetailsButton";
+import { PersonDetailsButton } from "../personDetailsButton";
+import { EditPatientDialog } from "../EditPatientDialog";
 
 export type Patient = {
   id: number;
@@ -52,7 +53,12 @@ export const pacienteColumns: ColumnDef<Patient>[] = [
     header: "Ações",
     cell: ({ row }) => {
       const patient = row.original;
-      return <PersonDetailsButton person={patient} type="patient" />;
+      return (
+        <div className="flex gap-8">
+          <PersonDetailsButton person={patient} type="patient" />
+          <EditPatientDialog patient={patient} />
+        </div>
+      );
     },
   },
 ];
