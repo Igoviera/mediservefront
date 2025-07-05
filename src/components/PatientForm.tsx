@@ -14,8 +14,8 @@ const schema = z.object({
     .max(50, "O nome deve ter no máximo 50 caracteres."),
   cpf: z
     .string()
-    .length(11, "CPF deve conter 11 dígitos")
-    .regex(/^\d+$/, "CPF deve conter apenas números")
+//    .length(11, "CPF deve conter 11 dígitos")
+//    .regex(/^\d+$/, "CPF deve conter apenas números")
     .nonempty("O CPF é obrigatório."),
   phone: z
     .string()
@@ -71,9 +71,10 @@ export type PatientFormData = z.infer<typeof schema>;
 type Props = {
   defaultValues?: Partial<PatientFormData>;
   onSubmit: (data: PatientFormData) => void;
+  loading: any;
 };
 
-export default function PatientForm({ defaultValues, onSubmit }: Props) {
+export default function PatientForm({ defaultValues, onSubmit, loading}: Props) {
   const {
     register,
     handleSubmit,
@@ -193,9 +194,10 @@ export default function PatientForm({ defaultValues, onSubmit }: Props) {
           <div className="flex justify-end w-full">
             <button
               type="submit"
+              disabled={loading}
               className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-blue-500 hover:bg-blue-800 text-white font-semibold flex items-center justify-center"
             >
-              Salvar
+              {loading ? 'Salvando...' : 'Cadastrar'}
             </button>
           </div>
         </div>

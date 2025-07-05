@@ -12,7 +12,9 @@ import {
   Specialty,
   specialtyColumns,
 } from "@/components/colmuns/specialty-comns";
-import AlertSuccess from "@/components/AlertSuccess";
+import AlertSuccess from "@/components/AlertMessage";
+import AlertMessage from "@/components/AlertMessage";
+import { FileText } from "lucide-react";
 
 const schema = z.object({
   name: z
@@ -27,6 +29,8 @@ export default function CadastroEspecialidade() {
   const [specialtys, setSpecialty] = useState<Specialty[]>([]);
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const {
     register,
@@ -43,12 +47,16 @@ export default function CadastroEspecialidade() {
         name: data.name,
       };
       const response = await specialtyService.creatSpecialty(newSpecialty);
-      setSuccess(true);
+      //setSuccess(true);
+      setSuccessMessage("Especialidade cadastrada com sucesso!");
       await fetchSpecialty();
       reset();
-      setTimeout(() => setSuccess(false), 3000);
-    } catch (error) {
+      //setTimeout(() => setSuccess(false), 3000);
+      setTimeout(() => setSuccessMessage(""), 5000);
+    } catch (error: any) {
+      setErrorMessage(error.response.data.errors);
       console.error("Erro ao cadastrar especialidade:", error);
+      setTimeout(() => setErrorMessage(""), 5000);
     }
   };
 
@@ -58,7 +66,7 @@ export default function CadastroEspecialidade() {
       setSpecialty(specialtys);
       setLoading(false);
     } catch (error) {
-      console.error("Erro ao buscar médicos:", error);
+      console.error("Erro ao buscar especialidade:", error);
     }
   };
 
@@ -69,14 +77,22 @@ export default function CadastroEspecialidade() {
   return (
     <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16 ">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-2xl mb-10 text-center">
+        <div className="flex text-blue-500 gap-2">
+          <h1 className="text-blue-500 font-bold text-2xl mb-10 text-center">
           Cadastro de Especialidade
         </h1>
+        <FileText size={24} />
+        </div>
+        
+        {successMessage && (
+          <AlertMessage message={successMessage} type="success" />
+        )}
+        {errorMessage && <AlertMessage message={errorMessage} type="error" />}
         <form
-          className="flex justify-end justify-items-center gap-2 min-w-full"
+          className="flex justify-end justify-items-center gap-2 min-w-full mt-3"
           onSubmit={handleSubmit(onSubmit)}
-        > 
-          <div className="w-3/6">  
+        >
+          <div className="w-3/6">
             <Input
               id="especialidade"
               type="text"
@@ -94,13 +110,6 @@ export default function CadastroEspecialidade() {
             </button>
           </div>
         </form>
-        {success && (
-          <AlertSuccess
-            message="Especialidade salva com sucesso!"
-            className="mt-4"
-          />
-        )}
-
         <div className="overflow-x-auto w-full mt-5">
           {loading ? (
             <Loading />

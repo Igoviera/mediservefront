@@ -9,7 +9,7 @@ import PatientForm from "@/components/PatientForm";
 import Patient from "@/types/Patient";
 import pacienteService from "@/services/pacienteService";
 import { da } from "date-fns/locale";
-import AlertSuccess from "./AlertSuccess";
+import AlertSuccess from "./AlertMessage";
 
 type Props = {
   patient: Patient;

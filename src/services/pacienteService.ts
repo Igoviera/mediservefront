@@ -8,10 +8,10 @@ const getAllPatients = (): Promise<Patient[]> => {
     .then((res) => res.data);
 };
 
-const creatPatients = (data:PatientFormData): Promise<Patient> => {
+const createPatients = (data:PatientFormData): Promise<Patient> => {
   return api
-    .post('/api/mediServe/patients')
-    .then((res) => res.data.content);
+    .post('/api/mediServe/patients',data)
+    .then((res) => res.data);
 };
 
 const updatePatient = (id: number, data:PatientFormData): Promise<Patient> => {
@@ -22,6 +22,6 @@ const updatePatient = (id: number, data:PatientFormData): Promise<Patient> => {
 
 export default {
   getAllPatients,
-  creatPatients,
+  createPatients,
   updatePatient
 };

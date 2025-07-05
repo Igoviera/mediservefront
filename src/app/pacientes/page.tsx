@@ -19,8 +19,8 @@ export default function Pacientes() {
         const patients = await pacient.getAllPatients();
         setPatient(patients);
         setLoading(false);
-      } catch (error) {
-        console.error("Erro ao buscar pacientes:", error);
+      } catch (error:any) {
+        console.error("Erro ao buscar pacientes:", error.response?.data);
       }
     };
     fetchPatient();
