@@ -111,7 +111,7 @@ export default function Cadastro() {
   return (
     <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
       <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <div className="flex gap-5 text-blue-900 font-bold text-2xl mb-10">
+        <div className="flex gap-5 text-blue-500 font-bold text-2xl mb-10">
           <h1>
             Cadastro de Médico
           </h1>
@@ -221,7 +221,7 @@ export default function Cadastro() {
             <div className="flex justify-end w-full">
               <button
                 type="submit"
-                className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-[#869FBB] hover:bg-slate-600 text-white font-semibold flex items-center justify-center"
+                className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-blue-500 hover:bg-blue-700 text-white font-semibold flex items-center justify-center"
               >
                 Salvar
               </button>

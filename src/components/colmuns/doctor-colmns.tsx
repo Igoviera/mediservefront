@@ -1,5 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
-import {PersonDetailsButton } from "../personDetailsButton";
+import { PersonDetailsButton } from "../personDetailsButton";
+import { Dialog } from "@radix-ui/react-dialog";
+import { DialogAgenda } from "../Agenda";
 
 export type Doctor = {
   id: number;
@@ -85,7 +87,12 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
     header: "Ações",
     cell: ({ row }) => {
       const doctor = row.original;
-      return <PersonDetailsButton person={doctor} type="doctor" />;
+      return (
+        <div className="flex items-center gap-2">
+          <PersonDetailsButton person={doctor} type="doctor" />
+          <DialogAgenda/>
+        </div>
+      );
     },
   },
 ];

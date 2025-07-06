@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import "@/app/globals.css";
+import { Toaster } from "sonner";
 
 
 export default function RootLayout({
@@ -13,6 +14,7 @@ export default function RootLayout({
         <Header />
         <div className="flex-grow flex justify-center items-center p-4 sm:p-8 md:p-16">
           {children}
+          <Toaster richColors position="top-right" />
         </div>
       </body>
     </html>

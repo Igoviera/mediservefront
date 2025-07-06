@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Mail, Phone, MapPin, User, HeartPulse } from "lucide-react";
+import { Mail, Phone, MapPin, User, HeartPulse,Eye} from "lucide-react";
 
 type PersonType = "doctor" | "patient" | "user";
 
@@ -58,8 +58,9 @@ export function PersonDetailsButton({
         <Button
           variant="default"
           size="sm"
-          className="bg-blue-500 hover:bg-blue-700"
+          className="bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:text-blue-700 px-4 py-2 rounded hover:bg-transparent"
         >
+          <Eye/>
           Detalhes
         </Button>
       </DialogTrigger>

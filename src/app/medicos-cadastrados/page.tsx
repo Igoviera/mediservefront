@@ -8,7 +8,8 @@ import doctorService from "@/services/doctorService";
 import { Loading } from "@/components/ui/loading";
 import { DataTable } from "@/components/ui/data-table";
 import { Doctor, medicoColumns } from "@/components/colmuns/doctor-colmns";
-import { Stethoscope } from "lucide-react";
+import { Stethoscope, UserRoundPlus } from "lucide-react";
+import Link from "next/link";
 
 export default function MedicosCadastrados() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
@@ -33,6 +34,13 @@ export default function MedicosCadastrados() {
         <div className="flex justify-center text-2xl text-blue-500 font-bold mt-10 gap-2">
           <p>Medicos Cadastrados</p>
           <Stethoscope size={30} />
+        </div>
+        <div className="flex justify-end m-5">
+          <Link href={"/cadastro-medico"}>
+            <button className="flex border gap-2 justify-center items-center border-blue-500 rounded-md p-2 text-blue-500 hover:border-blue-700 hover:text-blue-700">
+              <UserRoundPlus /> Cadastra Médico
+            </button>
+          </Link>
         </div>
       </section>
       <section>

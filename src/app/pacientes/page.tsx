@@ -7,7 +7,8 @@ import Image from "next/image";
 import pacient from "@/services/pacienteService";
 import { pacienteColumns, Patient } from "@/components/colmuns/patient-colmns";
 import { DataTable } from "@/components/ui/data-table";
-import { Users } from "lucide-react";
+import { UserRoundPlus, Users } from "lucide-react";
+import Link from "next/link";
 
 export default function Pacientes() {
   const [patients, setPatient] = useState<Patient[]>([]);
@@ -19,7 +20,7 @@ export default function Pacientes() {
         const patients = await pacient.getAllPatients();
         setPatient(patients);
         setLoading(false);
-      } catch (error:any) {
+      } catch (error: any) {
         console.error("Erro ao buscar pacientes:", error.response?.data);
       }
     };
@@ -32,6 +33,13 @@ export default function Pacientes() {
         <div className="flex gap-5 justify-center mt-10 text-blue-900 font-bold text-2xl mb-10">
           <h1>Pacientes Cadastrados</h1>
           <Users size={30} />
+        </div>
+        <div className="flex justify-end m-5">
+          <Link href={"/cadastro-paciente"}>
+            <button className="flex border gap-2 justify-center items-center border-blue-500 rounded-md p-2 text-blue-500 hover:border-blue-700 hover:text-blue-700">
+              <UserRoundPlus /> Cadastra Paciente
+            </button>
+          </Link>
         </div>
         {loading ? (
           <Loading />

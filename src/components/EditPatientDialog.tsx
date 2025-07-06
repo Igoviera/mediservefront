@@ -34,7 +34,7 @@ export function EditPatientDialog({ patient }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost" size="sm" className="border border-blue-500 text-blue-500 hover:border-blue-700 hover:text-blue-700">
           <Pencil size={20} />
         </Button>
       </DialogTrigger>
