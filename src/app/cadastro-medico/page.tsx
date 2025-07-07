@@ -1,11 +1,23 @@
 "use client";
 
 import Input from "@/components/Input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserPlus } from "lucide-react";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "@/components/ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
+import specialtyService from "@/services/specialtyService";
+import { Specialty } from "@/components/colmuns/specialty-comns";
+import doctorService from "@/services/doctorService";
+import AlertMessage from "@/components/AlertMessage";
 
 const schema = z.object({
   name: z
@@ -22,7 +34,7 @@ const schema = z.object({
   cpf: z
     .string()
     .length(11, "CPF deve conter 11 dígitos")
-    .regex(/^\d+$/, "CPF deve conter apenas números")
+    //.regex(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/, 'Formato de CPF inválido')
     .nonempty("O CPF é obrigatório."),
   phone: z
     .string()
@@ -65,7 +77,7 @@ const schema = z.object({
       .nonempty("A UF é obrigatória."),
   }),
   specialtyIds: z
-    .array(z.number())
+    .array(z.string())
     .min(1, "Selecione pelo menos uma especialidade")
     .nonempty("Selecione pelo menos uma especialidade."),
   user: z.object({
@@ -88,147 +100,247 @@ const schema = z.object({
 type DoctorFormData = z.infer<typeof schema>;
 
 export default function Cadastro() {
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [specialtys, setSpecialty] = useState<Specialty[]>([]);
+
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<DoctorFormData>({
     resolver: zodResolver(schema),
   });
 
-  const onSubmit = async (data: DoctorFormData) => {
-    console.log(data);
+  const onSubmit = (data: DoctorFormData) => {
+    const transformedData = {
+      ...data,
+      specialtyIds: data.specialtyIds.map((id) => Number(id)),
+    };
+    try {
+      doctorService.createDoctor(transformedData);
+      setSuccessMessage("Médico cadastrado com sucesso!");
+      reset();
+      
+      setTimeout(() => {
+        setSuccessMessage("");
+      }, 5000);
+
+    } catch (error: any) {
+      console.log(error);
+      const apiErrors = error.response?.data?.errors;
+
+      const message = Array.isArray(apiErrors)
+        ? apiErrors.join(", ")
+        : "Erro ao cadastrar Médico. Tente novamente.";
+      console.log("Mensagem de erro:", message);
+
+      setErrorMessage(message);
+
+      setTimeout(() => {
+        setErrorMessage("");
+      }, 5000);
+    } finally {
+      setLoading(false);
+    }
+
+    //console.log("Aqui", transformedData);
   };
 
-  console.log(errors);
+  const onError = (errors: any) => {
+    console.error("Erros de validação:", errors);
+  };
 
-  const mock = [
-    { id: 1, nome: "Cardiologia" },
-    { id: 2, nome: "Pediatria" },
-    { id: 3, nome: "Dermatologia" },
-  ];
+  const getAllSpecialty = async () => {
+    try {
+      const specialtys = await specialtyService.getAllSpecialty();
+      setSpecialty(specialtys);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getAllSpecialty();
+  }, []);
 
   return (
-    <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
-      <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <div className="flex gap-5 text-blue-500 font-bold text-2xl mb-10">
-          <h1>
-            Cadastro de Médico
-          </h1>
-           <UserPlus size={30} />
-        </div>
-
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="w-full flex flex-col items-center gap-[24px]">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
-              <Input
-                id="username"
-                type="text"
-                placeholder="Username"
-                label="Username:"
-                {...register("user.username")}
-                error={errors.user?.username?.message}
-              />
-              <Input
-                id="email"
-                type="email"
-                placeholder="Digite seu e-mail"
-                label="E-mail:"
-                {...register("user.email")}
-                error={errors.user?.email?.message}
-              />
-              <Input
-                id="password"
-                type="password"
-                placeholder="Digite uma senha"
-                label="Senha:"
-                {...register("user.password")}
-                error={errors.user?.password?.message}
-              />
-              <Input
-                id="name"
-                type="text"
-                placeholder="Nome Completo"
-                label="Nome completo:"
-                {...register("name")}
-                error={errors.name?.message}
-              />
-              <Input
-                id="crm"
-                type="text"
-                placeholder="CRM"
-                label="CRM:"
-                {...register("crm")}
-                error={errors.crm?.message}
-              />
-              <Input
-                id="description"
-                type="text"
-                placeholder="Descrição"
-                label="Descrição:"
-                {...register("description")}
-                error={errors.description?.message}
-              />
-              <Input
-                id="cep"
-                type="text"
-                placeholder="CEP"
-                label="CEP:"
-                {...register("address.cep")}
-                error={errors.address?.cep?.message}
-              />
-              <Input
-                id="logradouro"
-                type="text"
-                placeholder="Rua"
-                label="Rua:"
-                {...register("address.logradouro")}
-                error={errors.address?.logradouro?.message}
-              />
-              <Input
-                id="city"
-                type="text"
-                placeholder="Cidade"
-                label="Cidade:"
-                {...register("address.city")}
-                error={errors.address?.city?.message}
-              />
-              <Input
-                id="phone"
-                type="text"
-                placeholder="Telefone"
-                label="Telefone:"
-                {...register("phone")}
-                error={errors.phone?.message}
-              />
-              <Input
-                id="neighborhood"
-                type="text"
-                placeholder="Bairro"
-                label="Bairro:"
-                {...register("address.neighborhood")}
-                error={errors.address?.neighborhood?.message}
-              />
-              <Input
-                id="queryValue"
-                type="text"
-                placeholder="Valor da consulta"
-                label="Valor da consulta:"
-                {...register("queryValue")}
-                error={errors.queryValue?.message}
-              />
-            </div>
-            <div className="flex justify-end w-full">
-              <button
-                type="submit"
-                className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-blue-500 hover:bg-blue-700 text-white font-semibold flex items-center justify-center"
-              >
-                Salvar
-              </button>
-            </div>
-          </div>
-        </form>
+    <div className=" bg-white rounded-[12px] border p-10 flex flex-col items-center">
+      <div className="flex gap-5 text-blue-500 font-bold text-2xl mb-10">
+        <h1>Cadastro de Médico</h1>
+        <UserPlus size={30} />
       </div>
+      <div className="w-full">
+        {errorMessage && <AlertMessage type="error" message={errorMessage} />}
+        {successMessage && (
+          <AlertMessage type="success" message={successMessage} />
+        )}
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="w-full mt-5">
+        <div className="flex flex-col items-center gap-3 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 w-full">
+            <Input
+              id="username"
+              type="text"
+              placeholder="Username"
+              label="Username:"
+              {...register("user.username")}
+              error={errors.user?.username?.message}
+            />
+            <Input
+              id="email"
+              type="email"
+              placeholder="Digite seu e-mail"
+              label="E-mail:"
+              {...register("user.email")}
+              error={errors.user?.email?.message}
+            />
+            <Input
+              id="password"
+              type="password"
+              placeholder="Digite uma senha"
+              label="Senha:"
+              {...register("user.password")}
+              error={errors.user?.password?.message}
+            />
+            <Input
+              id="name"
+              type="text"
+              placeholder="Nome Completo"
+              label="Nome completo:"
+              {...register("name")}
+              error={errors.name?.message}
+            />
+            <Input
+              id="cpf"
+              type="text"
+              placeholder="CPF"
+              label="CPF:"
+              {...register("cpf")}
+              error={errors.cpf?.message}
+            />
+            <Input
+              id="crm"
+              type="text"
+              placeholder="CRM"
+              label="CRM:"
+              {...register("crm")}
+              error={errors.crm?.message}
+            />
+            <Input
+              id="description"
+              type="text"
+              placeholder="Descrição"
+              label="Descrição:"
+              {...register("description")}
+              error={errors.description?.message}
+            />
+            <Input
+              id="cep"
+              type="text"
+              placeholder="CEP"
+              label="CEP:"
+              {...register("address.cep")}
+              error={errors.address?.cep?.message}
+            />
+            <Input
+              id="logradouro"
+              type="text"
+              placeholder="Rua"
+              label="Rua:"
+              {...register("address.logradouro")}
+              error={errors.address?.logradouro?.message}
+            />
+            <Input
+              id="locationNumber"
+              type="text"
+              placeholder="Número"
+              label="N°:"
+              {...register("address.locationNumber")}
+              error={errors.address?.locationNumber?.message}
+            />
+            <Input
+              id="city"
+              type="text"
+              placeholder="Cidade"
+              label="Cidade:"
+              {...register("address.city")}
+              error={errors.address?.city?.message}
+            />
+            <Input
+              id="uf"
+              type="text"
+              placeholder="UF"
+              label="UF:"
+              {...register("address.uf")}
+              error={errors.address?.uf?.message}
+            />
+            <Input
+              id="phone"
+              type="text"
+              placeholder="Telefone"
+              label="Telefone:"
+              {...register("phone")}
+              error={errors.phone?.message}
+            />
+            <Input
+              id="neighborhood"
+              type="text"
+              placeholder="Bairro"
+              label="Bairro:"
+              {...register("address.neighborhood")}
+              error={errors.address?.neighborhood?.message}
+            />
+            <Input
+              id="queryValue"
+              type="number"
+              placeholder="Valor da consulta"
+              label="Valor da consulta:"
+              {...register("queryValue", { valueAsNumber: true })}
+              error={errors.queryValue?.message}
+            />
+          </div>
+          <div className="w-full border rounded-md border-slate-300 p-3">
+            <label className="block font-medium text-gray-700 mb-2">
+              Selecione Especialidades:
+            </label>
+            <div className="grid grid-cols-2 gap-2">
+              {specialtys.map((spec) => (
+                <label
+                  key={spec.id}
+                  className="flex items-center gap-2 text-sm"
+                >
+                  <input
+                    type="checkbox"
+                    value={spec.id}
+                    {...register("specialtyIds", {
+                      setValueAs: (value) => Number(value),
+                    })}
+                  />
+                  {spec.name}
+                </label>
+              ))}
+            </div>
+            {errors.specialtyIds && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.specialtyIds.message}
+              </p>
+            )}
+          </div>
+
+          <div className="flex justify-end w-full">
+            <button
+              type="submit"
+              className="w-full sm:w-1/2 h-10 rounded-md bg-blue-500 hover:bg-blue-700 text-white font-semibold flex items-center justify-center"
+            >
+              Salvar
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   );
 }

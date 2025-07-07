@@ -29,7 +29,7 @@ export default function MedicosCadastrados() {
   }, []);
 
   return (
-    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10 w-screen">
+    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
       <section className="flex flex-col">
         <div className="flex justify-center text-2xl text-blue-500 font-bold mt-10 gap-2">
           <p>Medicos Cadastrados</p>
@@ -38,7 +38,7 @@ export default function MedicosCadastrados() {
         <div className="flex justify-end m-5">
           <Link href={"/cadastro-medico"}>
             <button className="flex border gap-2 justify-center items-center border-blue-500 rounded-md p-2 text-blue-500 hover:border-blue-700 hover:text-blue-700">
-              <UserRoundPlus /> Cadastra Médico
+              <UserRoundPlus /> Novo Médico
             </button>
           </Link>
         </div>

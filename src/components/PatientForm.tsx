@@ -86,14 +86,14 @@ export default function PatientForm({ defaultValues, onSubmit, loading}: Props) 
   });
 
   return (
-    <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
+    <div className="h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
       <div className="flex justify-center text-2xl text-blue-800 font-bold mt-5 mb-10 gap-2">
         <p>Pacientes Cadastrados</p>
         <UserPlus size={30} />
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="w-full flex flex-col items-center gap-[24px]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-[7.64px] w-full">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-5">
+        <div className="flex flex-col items-center gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-[7.64px] w-full">
             <Input
               id="username"
               type="text"
@@ -197,7 +197,7 @@ export default function PatientForm({ defaultValues, onSubmit, loading}: Props) 
               disabled={loading}
               className="w-full sm:w-1/2 h-10 rounded-[13.93px] bg-blue-500 hover:bg-blue-800 text-white font-semibold flex items-center justify-center"
             >
-              {loading ? 'Salvando...' : 'Cadastrar'}
+              {loading ? 'Salvando...' : 'Salvar'}
             </button>
           </div>
         </div>

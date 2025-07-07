@@ -28,16 +28,16 @@ export default function Pacientes() {
   }, []);
 
   return (
-    <main className="bg-[#FFFFFF]  border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10 w-screen">
+    <main className="bg-[#FFFFFF]  border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
       <section className="flex flex-col ">
-        <div className="flex gap-5 justify-center mt-10 text-blue-900 font-bold text-2xl mb-10">
+        <div className="flex gap-5 justify-center mt-10 text-blue-500 font-bold text-2xl mb-10">
           <h1>Pacientes Cadastrados</h1>
           <Users size={30} />
         </div>
         <div className="flex justify-end m-5">
           <Link href={"/cadastro-paciente"}>
             <button className="flex border gap-2 justify-center items-center border-blue-500 rounded-md p-2 text-blue-500 hover:border-blue-700 hover:text-blue-700">
-              <UserRoundPlus /> Cadastra Paciente
+              <UserRoundPlus /> Novo Paciente
             </button>
           </Link>
         </div>

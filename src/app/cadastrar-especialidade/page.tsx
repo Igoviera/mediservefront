@@ -75,8 +75,7 @@ export default function CadastroEspecialidade() {
   }, []);
 
   return (
-    <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16 ">
-      <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
+      <div className="bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
         <div className="flex text-blue-500 gap-2">
           <h1 className="text-blue-500 font-bold text-2xl mb-10 text-center">
           Cadastro de Especialidade
@@ -92,7 +91,7 @@ export default function CadastroEspecialidade() {
           className="flex justify-end justify-items-center gap-2 min-w-full mt-3"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <div className="w-3/6">
+          <div className="w-2/6">
             <Input
               id="especialidade"
               type="text"
@@ -120,6 +119,5 @@ export default function CadastroEspecialidade() {
           )}
         </div>
       </div>
-    </div>
   );
 }

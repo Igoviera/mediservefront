@@ -22,13 +22,13 @@ export default function CadastroPaciente() {
       <PatientForm
         loading={loading}
         onSubmit={async (data) => {
-        setLoading(true);
-        setErrorMessage("");
-        setSuccessMessage("");
+          setLoading(true);
+          setErrorMessage("");
+          setSuccessMessage("");
 
           try {
             await pacienteService.createPatients(data);
-            setSuccessMessage("Paciente cadastrado com sucesso!")
+            setSuccessMessage("Paciente cadastrado com sucesso!");
           } catch (error: any) {
             //console.log("Erro da API:", error.response?.data);
             const apiErrors = error.response?.data?.errors;
