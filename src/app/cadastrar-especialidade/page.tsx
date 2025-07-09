@@ -15,6 +15,7 @@ import {
 import AlertSuccess from "@/components/AlertMessage";
 import AlertMessage from "@/components/AlertMessage";
 import { FileText } from "lucide-react";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const schema = z.object({
   name: z
@@ -75,49 +76,52 @@ export default function CadastroEspecialidade() {
   }, []);
 
   return (
-      <div className="bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <div className="flex text-blue-500 gap-2">
-          <h1 className="text-blue-500 font-bold text-2xl mb-10 text-center">
+    <div className="bg-white rounded-[12px] border p-[40px]">
+      <CardHeader>
+        <CardTitle className="text-xl flex items-center gap-2 text-blue-500">
+          <FileText className="h-6 w-6" />
           Cadastro de Especialidade
-        </h1>
-        <FileText size={24} />
+        </CardTitle>
+        <CardDescription>
+          Defina as especialidades oferecidas pela instituição de saúde.
+        </CardDescription>
+      </CardHeader>
+
+      {successMessage && (
+        <AlertMessage message={successMessage} type="success" />
+      )}
+      {errorMessage && <AlertMessage message={errorMessage} type="error" />}
+      <form
+        className="flex justify-end justify-items-center gap-2 min-w-full mt-3"
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className="w-2/6">
+          <Input
+            id="especialidade"
+            type="text"
+            placeholder="Nome da especialidade para cadastro"
+            {...register("name")}
+            error={errors.name?.message}
+          />
         </div>
-        
-        {successMessage && (
-          <AlertMessage message={successMessage} type="success" />
+        <div>
+          <button
+            type="submit"
+            className="h-10 rounded-sm bg-[#869FBB] hover:bg-slate-600 text-white font-semibold flex items-center justify-center px-4" /* Adicionei px-4 para preenchimento lateral */
+          >
+            Salvar
+          </button>
+        </div>
+      </form>
+      <div className="overflow-x-auto w-full mt-5">
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="m-5">
+            <DataTable columns={specialtyColumns} data={specialtys} />
+          </div>
         )}
-        {errorMessage && <AlertMessage message={errorMessage} type="error" />}
-        <form
-          className="flex justify-end justify-items-center gap-2 min-w-full mt-3"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="w-2/6">
-            <Input
-              id="especialidade"
-              type="text"
-              placeholder="Nome da especialidade para cadastro"
-              {...register("name")}
-              error={errors.name?.message}
-            />
-          </div>
-          <div>
-            <button
-              type="submit"
-              className="h-10 rounded-sm bg-[#869FBB] hover:bg-slate-600 text-white font-semibold flex items-center justify-center px-4" /* Adicionei px-4 para preenchimento lateral */
-            >
-              Salvar
-            </button>
-          </div>
-        </form>
-        <div className="overflow-x-auto w-full mt-5">
-          {loading ? (
-            <Loading />
-          ) : (
-            <div className="m-5">
-              <DataTable columns={specialtyColumns} data={specialtys} />
-            </div>
-          )}
-        </div>
       </div>
+    </div>
   );
 }

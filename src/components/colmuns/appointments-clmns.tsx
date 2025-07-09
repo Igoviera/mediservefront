@@ -1,14 +1,38 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { format } from "date-fns";
+import { format, set, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, nextSaturday, nextSunday } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export type Appointment = {
   id: number;
   patientName: string;
   doctorName: string;
-  data: string;
+  dayOfWeek: string;
+  time: string;
   status: string;
 };
+
+function getNextDateFromDayOfWeek(dayOfWeek: string): Date {
+  const today = new Date();
+
+  switch (dayOfWeek.toUpperCase()) {
+    case "MONDAY":
+      return nextMonday(today);
+    case "TUESDAY":
+      return nextTuesday(today);
+    case "WEDNESDAY":
+      return nextWednesday(today);
+    case "THURSDAY":
+      return nextThursday(today);
+    case "FRIDAY":
+      return nextFriday(today);
+    case "SATURDAY":
+      return nextSaturday(today);
+    case "SUNDAY":
+      return nextSunday(today);
+    default:
+      return today; // fallback caso o valor esteja errado
+  }
+}
 
 export const appointmentColumns: ColumnDef<Appointment>[] = [
   {
@@ -27,17 +51,29 @@ export const appointmentColumns: ColumnDef<Appointment>[] = [
     enableColumnFilter: true,
   },
   {
-    accessorKey: "data",
+    accessorKey: "dayOfWeek",
     header: "Data",
     enableColumnFilter: true,
     cell: ({ row }) => {
-    const dateStr = row.getValue("data") as string;
-    const date = new Date(dateStr);
+      const dayOfWeek = row.getValue("dayOfWeek") as string;
+      const time = row.getValue("time") as string;
 
-    const formatted = format(date, "dd/MM/yyyy 'às' HH:mm", { locale: ptBR });
+      const baseDate = getNextDateFromDayOfWeek(dayOfWeek);
 
-    return <span>{formatted}</span>;
-  },
+      const [hours = 0, minutes = 0, seconds = 0] = time?.split(":")?.map(Number) || [];
+
+      const finalDate = set(baseDate, {
+        hours,
+        minutes,
+        seconds,
+      });
+
+      const formatted = format(finalDate, "dd/MM/yyyy 'às' HH:mm", {
+        locale: ptBR,
+      });
+
+      return <span>{formatted}</span>;
+    },
   },
   {
     accessorKey: "status",
@@ -51,9 +87,7 @@ export const appointmentColumns: ColumnDef<Appointment>[] = [
           : "bg-red-300 text-red-800";
 
       return (
-        <span
-          className={`px-4 py-1 text-xs font-medium rounded-full ${statusStyle}`}
-        >
+        <span className={`px-4 py-1 text-xs font-medium rounded-full ${statusStyle}`}>
           {status}
         </span>
       );

@@ -3,10 +3,14 @@
 import { useEffect, useState } from "react";
 import { Loading } from "@/components/ui/loading";
 import { DataTable } from "@/components/ui/data-table";
-import { Appointment, appointmentColumns } from "@/components/colmuns/appointments-clmns";
+import {
+  Appointment,
+  appointmentColumns,
+} from "@/components/colmuns/appointments-clmns";
 import appointmentsService from "@/services/appointmentsService";
-import { ClipboardList } from "lucide-react";
-
+import { Calendar, CalendarCheck, ClipboardList } from "lucide-react";
+import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "recharts";
 
 export default function MedicosCadastrados() {
   const [appointments, setAppointment] = useState<Appointment[]>([]);
@@ -26,13 +30,16 @@ export default function MedicosCadastrados() {
   }, []);
 
   return (
-    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10 w-screen">
-      <section className="flex flex-col">
-        <div className="w-full flex flex-row justify-center my-[4rem]">
-          <p className="text-center text-[25px] font-[700] text-blue-900">Consultas Agendadas</p>
-          <ClipboardList size={30} className="text-blue-900"/>  
-        </div>
-      </section>
+    <main className="bg-[#FFFFFF] border border-[#C8C8C8] rounded-md mx-3 px-4 sm:px-0 sm:mx-10 my-10">
+      <CardHeader>
+        <CardTitle className="text-xl flex items-center gap-2 text-blue-500">
+          <CalendarCheck className="h-6 w-6" />
+          Consultas Agendadas
+        </CardTitle>
+        <CardDescription>
+          Visualize os horários já reservados para este médico.
+        </CardDescription>
+      </CardHeader>
       <section>
         {loading ? (
           <Loading />

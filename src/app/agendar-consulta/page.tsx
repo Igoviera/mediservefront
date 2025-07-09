@@ -81,71 +81,7 @@ export default function Page() {
 
   return (
     <div className="w-screen bg-[#F1F1F1] flex items-center justify-center px-4 sm:px-8 md:px-16">
-      <div className="w-full max-w-[1000px] h-auto bg-white rounded-[12px] border p-[40px] flex flex-col items-center">
-        <h1 className="font-bold text-2xl mb-10 text-center">
-          Agendar Consulta
-        </h1>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col items-center gap-[24px]"
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-[7.64px] w-full">
-            <select
-              {...register("patientId")}
-              className="w-full border border-gray-300 rounded p-2"
-            >
-              <option value="">Selecione um paciente</option>
-              {patients.map((patient) => (
-                <option key={patient.id} value={patient.id}>
-                  {patient.name}
-                </option>
-              ))}
-            </select>
-            {errors.patientId && (
-              <p className="text-red-500 text-sm">{errors.patientId.message}</p>
-            )}
-
-            <select
-              {...register("doctorId")}
-              className="w-full border border-gray-300 rounded p-2"
-            >
-              <option value="">Selecione um médico</option>
-              {doctors.map((doctor) => (
-                <option key={doctor.id} value={doctor.id}>
-                  {doctor.name}
-                </option>
-              ))}
-            </select>
-            {errors.doctorId && (
-              <p className="text-red-500 text-sm">{errors.doctorId.message}</p>
-            )}
-
-            <Input
-              type="date"
-              label="Data do atendimento:"
-              {...register("data")}
-              error={errors.data?.message}
-            />
-            <Input
-              type="time"
-              label="Horário:"
-              {...register("hora")}
-              min="08:00"
-              max="18:00"
-              error={errors.hora?.message}
-            />
-          </div>
-
-          <div className="flex flex-col sm:flex-row gap-[20px] w-full justify-center">
-            <button
-              type="submit"
-              className="w-full sm:w-[138px] h-[30px] rounded-[13.93px] bg-[#869FBB] text-white font-semibold"
-            >
-              Agendar
-            </button>
-          </div>
-        </form>
-      </div>
+      <Input type="text" placeholder="Digite o nome do médico" />
     </div>
   );
 }

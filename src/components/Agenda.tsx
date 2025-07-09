@@ -56,7 +56,7 @@ export function DialogAgenda() {
     <Dialog>
       <DialogTrigger asChild>
         <Button variant={"default"} size="sm" className="bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:text-blue-700 px-4 py-2 rounded hover:bg-transparent">
-          <CalendarDays/>Agenda
+          <CalendarDays/>Agendar Consulta
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-5xl p-6">

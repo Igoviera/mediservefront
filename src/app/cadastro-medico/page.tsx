@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserPlus } from "lucide-react";
+import { Car, UserPlus } from "lucide-react";
 import {
   FormControl,
   FormDescription,
@@ -18,6 +18,20 @@ import specialtyService from "@/services/specialtyService";
 import { Specialty } from "@/components/colmuns/specialty-comns";
 import doctorService from "@/services/doctorService";
 import AlertMessage from "@/components/AlertMessage";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const schema = z.object({
   name: z
@@ -95,6 +109,17 @@ const schema = z.object({
       .min(6, "A senha deve ter no mínimo 8 caracteres.")
       .nonempty("A senha é obrigatória."),
   }),
+  dayOfWeek: z.enum([
+    "SEGUNDA",
+    "TERÇA",
+    "QUARTA",
+    "QUINTA",
+    "SEXTA",
+    "SÁBADO",
+  ]),
+  startTime: z.string().min(1, "Informe o horário inicial"),
+  endTime: z.string().min(1, "Informe o horário final"),
+  durationMinutes: z.coerce.number().min(5, "Mínimo 5 minutos"),
 });
 
 type DoctorFormData = z.infer<typeof schema>;
@@ -108,10 +133,17 @@ export default function Cadastro() {
   const {
     register,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors },
   } = useForm<DoctorFormData>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      dayOfWeek: "SEGUNDA",
+      startTime: "08:00",
+      endTime: "12:00",
+      durationMinutes: 30,
+    },
   });
 
   const onSubmit = (data: DoctorFormData) => {
@@ -123,11 +155,10 @@ export default function Cadastro() {
       doctorService.createDoctor(transformedData);
       setSuccessMessage("Médico cadastrado com sucesso!");
       reset();
-      
+
       setTimeout(() => {
         setSuccessMessage("");
       }, 5000);
-
     } catch (error: any) {
       console.log(error);
       const apiErrors = error.response?.data?.errors;
@@ -167,21 +198,27 @@ export default function Cadastro() {
   }, []);
 
   return (
-    <div className=" bg-white rounded-[12px] border p-10 flex flex-col items-center">
-      <div className="flex gap-5 text-blue-500 font-bold text-2xl mb-10">
-        <h1>Cadastro de Médico</h1>
-        <UserPlus size={30} />
-      </div>
-      <div className="w-full">
+    <div className=" bg-white rounded-[12px] border p-10 flex flex-col">
+      <CardHeader>
+        <CardTitle className="text-xl flex items-center gap-2 text-blue-500">
+          <UserPlus className="h-6 w-6" />
+          Cadastrar Médico
+        </CardTitle>
+        <CardDescription>
+          Realize o cadastro do médico.
+        </CardDescription>
+      </CardHeader>
+
+      <div className="w-1/3">
         {errorMessage && <AlertMessage type="error" message={errorMessage} />}
         {successMessage && (
           <AlertMessage type="success" message={successMessage} />
         )}
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit, onError)} className="w-full mt-5">
-        <div className="flex flex-col items-center gap-3 w-full">
-          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 w-full">
+      <form onSubmit={handleSubmit(onSubmit, onError)} className="mt-5">
+        <div className="flex flex-col items-center gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3  w-full">
             <Input
               id="username"
               type="text"
@@ -197,6 +234,14 @@ export default function Cadastro() {
               label="E-mail:"
               {...register("user.email")}
               error={errors.user?.email?.message}
+            />
+            <Input
+              id="password"
+              type="password"
+              placeholder="Digite uma senha"
+              label="Senha:"
+              {...register("user.password")}
+              error={errors.user?.password?.message}
             />
             <Input
               id="password"
@@ -331,7 +376,7 @@ export default function Cadastro() {
             )}
           </div>
 
-          <div className="flex justify-end w-full">
+          <div className="flex justify-end w-full mt-5">
             <button
               type="submit"
               className="w-full sm:w-1/2 h-10 rounded-md bg-blue-500 hover:bg-blue-700 text-white font-semibold flex items-center justify-center"

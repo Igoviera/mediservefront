@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import {
   Calendar,
+  CalendarCheck,
   Home,
   HomeIcon,
   LayoutDashboard,
@@ -65,10 +66,16 @@ function SidebarContent() {
         <Stethoscope size={18} /> Especialidade
       </Link>
       <Link
-        href="#"
+        href="/cadastrar-agenda"
         className="flex gap-2 p-2 text-gray-500 font-medium hover:text-blue-600"
       >
-        <Calendar size={18} /> Agenda
+        <Calendar size={18} /> Criar Agenda médica
+      </Link>
+      <Link
+        href="/consultas-agendadas"
+        className="flex gap-2 p-2 text-gray-500 font-medium hover:text-blue-600"
+      >
+        <CalendarCheck size={18} /> Consultas Agendadas
       </Link>
       <Link
         href="/pacientes"
