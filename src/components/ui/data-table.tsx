@@ -62,18 +62,21 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <Input
+      {/* <Input
         placeholder="Buscar por nome..."
         value={globalFilter ?? ""}
         onChange={(event: any) => setGlobalFilter(event.target.value)}
         className="mb-4 max-w-sm"
-      />
+      /> */}
 
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="bg-blue-500 hover:bg-blue-500">
+              <TableRow
+                key={headerGroup.id}
+                className="bg-blue-500 hover:bg-blue-500"
+              >
                 {headerGroup.headers.map((header) => (
                   <TableHead key={header.id} className="text-white">
                     {flexRender(

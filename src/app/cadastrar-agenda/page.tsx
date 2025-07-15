@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Clock, Calendar, User, Timer } from "lucide-react";
+import { Clock, Calendar, User, Timer, CalendarCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,6 +38,10 @@ import { DataTable } from "@/components/ui/data-table";
 import { useEffect, useState } from "react";
 import diaryDoctorService from "@/services/diaryDoctorService";
 import { Loading } from "@/components/ui/loading";
+import AlertMessage from "@/components/AlertMessage";
+import doctorService from "@/services/doctorService";
+import { Doctor } from "@/components/colmuns/doctor-colmns";
+import { Label } from "@/components/ui/label";
 
 const daysOfWeek = [
   { value: "SEGUNDA", label: "Segunda-feira" },
@@ -98,7 +102,13 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function DoctorScheduleForm() {
   const [diarys, setDiary] = useState<Diary[]>([]);
+  const [doctors, setDoctors] = useState<Doctor[]>([]);
+  const [selectedDoctorId, setSelectedDoctorId] = useState<string | undefined>(
+    undefined
+  );
   const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -112,48 +122,56 @@ export default function DoctorScheduleForm() {
   });
 
   useEffect(() => {
-    const fetchDiary = async () => {
+    const fetchDoctors = async () => {
       try {
-        const diarys = await diaryDoctorService.getAllDiaryDoctor();
-
-        const formatteDiarys = diarys.map((diary) => ({
-          ...diary,
-          startTime: diary.startTime.slice(0, 5),
-          endTime: diary.endTime.slice(0, 5),
-        }));
-
-        setDiary(formatteDiarys);
-        setLoading(false);
-      } catch (error) {
-        console.error("Erro ao buscar médicos:", error);
+        const res = await doctorService.getAllDoctors();
+        setDoctors(res);
+      } catch (error: any) {
+        console.log("Erro ao buscar médico", error);
       }
     };
-    fetchDiary();
+
+    fetchDoctors();
   }, []);
 
-  async function onSubmit(values: FormValues) {
+  const fetchDiary = async (doctorId: string) => {
     try {
-      // Aqui você faria a chamada para sua API
-      console.log("Dados da agenda:", values);
+      const diarys = await diaryDoctorService.buscarAgendaPorMedico(doctorId);
 
-      // Simulando uma chamada de API
-      const response = await fetch("/api/doctor-schedule", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const formatteDiarys = diarys.map((diary) => ({
+        ...diary,
+        startTime: diary.startTime.slice(0, 5),
+        endTime: diary.endTime.slice(0, 5),
+      }));
 
-      if (response.ok) {
-        form.reset();
-      } else {
-        throw new Error("Erro ao cadastrar agenda");
-      }
+      setDiary(formatteDiarys);
+      setLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Erro ao buscar médicos:", error);
     }
-  }
+  };
+
+  useEffect(() => {
+    if (selectedDoctorId) {
+      fetchDiary(selectedDoctorId);
+    }
+  }, [selectedDoctorId]);
+
+  const onSubmit = async (values: FormValues) => {
+    try {
+      await diaryDoctorService.createDiaryDoctor(values);
+      setSuccessMessage("Agenda cadastrada com sucesso!");
+      setTimeout(() => setSuccessMessage(""), 5000);
+      console.log("Dados da agenda:", values);
+    } catch (error: any) {
+      console.log("Dados da agenda:", values);
+      const apiError =
+        error?.response?.data?.errors?.[0] || "Erro ao cadastrar agenda.";
+      setErrorMessage(apiError);
+      setTimeout(() => setErrorMessage(""), 5000);
+      console.error(error);
+    }
+  };
 
   return (
     <div className="max-w-full mx-auto">
@@ -169,6 +187,10 @@ export default function DoctorScheduleForm() {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          {successMessage && (
+            <AlertMessage message={successMessage} type="success" />
+          )}
+          {errorMessage && <AlertMessage message={errorMessage} type="error" />}
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
@@ -210,18 +232,25 @@ export default function DoctorScheduleForm() {
                     <FormItem>
                       <FormLabel className="flex items-center gap-2">
                         <User className="h-4 w-4" />
-                        ID do Médico
+                        Médico
                       </FormLabel>
-                      <FormControl>
-                        <Input
-                          type="number"
-                          placeholder="Digite o ID do médico"
-                          {...field}
-                          onChange={(e) =>
-                            field.onChange(Number(e.target.value))
-                          }
-                        />
-                      </FormControl>
+                      <Select
+                        onValueChange={(value) => setSelectedDoctorId(value)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Selecione um médico" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {doctors.map((medico) => (
+                            <SelectItem
+                              key={medico.id}
+                              value={String(medico.id)}
+                            >
+                              {medico.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
 
                       <FormMessage />
                     </FormItem>
@@ -318,14 +347,30 @@ export default function DoctorScheduleForm() {
       <Card className="mt-5">
         <CardHeader>
           <CardTitle className="text-xl flex items-center gap-2 text-blue-500">
-            <Calendar className="h-6 w-6" />
-            Agendamentos Semanais dos Médicos
+            <CalendarCheck className="h-6 w-6" />
+            Agenda semanal do Médico
           </CardTitle>
           <CardDescription>
-            Visualize e gerencie os horários de atendimento de todos os médicos
-            por dia da semana.
+            Visualize e gerencie os horários de atendimento do médico por dia da
+            semana.
           </CardDescription>
         </CardHeader>
+        <CardContent>
+          <Label>Selecione o Médico</Label>
+          <Select onValueChange={(value) => setSelectedDoctorId(value)}>
+            <SelectTrigger className="w-[300px]">
+              <SelectValue placeholder="Selecione um médico" />
+            </SelectTrigger>
+            <SelectContent>
+              {doctors.map((medico) => (
+                <SelectItem key={medico.id} value={String(medico.id)}>
+                  {medico.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </CardContent>
+
         <CardContent>
           {loading ? (
             <Loading />
