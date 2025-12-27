@@ -15,7 +15,19 @@ const creatAppointments = (appointment : AppointmentRequest): Promise<Appointmen
     .then((res) => res.data);
 };
 
+const appointmentCancel = (id: String) => {
+  return api.post(`/api/mediServe/appointments/${id}/cancel`)
+  .then((res) => res.data);
+}
+
+const finishAppointment = (id: String) => {
+  return api.post(`/api/mediServe/appointments/${id}/finish`)
+  .then((res) => res.data);
+}
+
 export default {
     getAllAppointments,
-    creatAppointments
+    creatAppointments,
+    appointmentCancel,
+    finishAppointment
 };
