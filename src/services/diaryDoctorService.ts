@@ -17,6 +17,7 @@ const createDiaryDoctor = async (diary: Diary) => {
     .then((res) => res.data);
 };
 
+
 export default {
   getAllDiaryDoctor,
   createDiaryDoctor,

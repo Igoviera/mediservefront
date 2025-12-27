@@ -1,15 +1,15 @@
-import { Appointments } from "@/types/Appointments";
+
+import { AppointmentRequest } from "@/components/AppointmentDialog";
 import api from "./api"
-import { Appointment } from "@/components/colmuns/appointments-clmns";
 
 
-const getAllAppointments = (): Promise<Appointment[]> => {
+const getAllAppointments = (): Promise<AppointmentRequest[]> => {
   return api
     .get('/api/mediServe/appointments')
     .then((res) => res.data);
 };
 
-const creatAppointments = (appointment : Appointments): Promise<Appointments> => {
+const creatAppointments = (appointment : AppointmentRequest): Promise<AppointmentRequest> => {
   return api
     .post('/api/mediServe/appointments', appointment)
     .then((res) => res.data);

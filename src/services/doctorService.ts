@@ -11,7 +11,16 @@ const createDoctor = async (doctor: any) => {
   return await api.post("/api/mediServe/doctors", doctor).then((res) => res.data);
 };
 
+const getAvailability = async (doctorId:any, date:any) => {
+  return await api.get(`/api/mediServe/doctors/${doctorId}/availability`,{
+    params:{
+      date: date
+    }
+  })
+}
+
 export default {
   getAllDoctors,
   createDoctor,
+  getAvailability
 };

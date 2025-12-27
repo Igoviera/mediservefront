@@ -62,12 +62,12 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      {/* <Input
+      <Input
         placeholder="Buscar por nome..."
         value={globalFilter ?? ""}
         onChange={(event: any) => setGlobalFilter(event.target.value)}
         className="mb-4 max-w-sm"
-      /> */}
+      />
 
       <div className="rounded-md border">
         <Table>

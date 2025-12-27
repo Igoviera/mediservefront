@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AppBarChat from "@/components/AppBarChart";
 import ChartPieDonutText from "@/components/ChartPieDonutText";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { BarChart3, Users, User, CalendarX } from "lucide-react";
+import { BarChart3, Users, User, CalendarX, CalendarOff } from "lucide-react";
 import dashboardService from "@/services/dashboardService"; // ajuste o caminho conforme necessário
 
 export default function Dashboard() {
@@ -12,6 +12,8 @@ export default function Dashboard() {
     totalDoctors: 0,
     totalPatient: 0,
     totalAppointment: 0,
+    totalAppointmentCancel: 0
+
   });
 
   useEffect(() => {
@@ -19,7 +21,6 @@ export default function Dashboard() {
       try {
         const data = await dashboardService.getDashboard();
         setDashboardData(data);
-        console.log(data);
       } catch (error) {
         console.error("Erro ao carregar dados do dashboard:", error);
       }
@@ -50,6 +51,13 @@ export default function Dashboard() {
       bg: "bg-green-50",
       text: "text-green-700",
     },
+        {
+      title: "Consultas Canceladas",
+      value: dashboardData.totalAppointmentCancel,
+      icon: <CalendarOff className="w-6 h-6 text-red-500" />,
+      bg: "bg-red-50",
+      text: "text-red-700",
+    },
     {
       title: "Consultas Hoje",
       value: 0,
@@ -58,9 +66,9 @@ export default function Dashboard() {
       text: "text-red-700",
     },
   ];
-
+  
   return (
-    <div className="w-full p-4 md:p-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+    <div className="w-full p-4 md:p-8 grid grid-cols-1 md:grid-cols-5 gap-6">
       {stats.map((item, index) => (
         <Card
           key={index}
@@ -81,7 +89,7 @@ export default function Dashboard() {
       <div className="col-span-1 md:col-span-2">
         <Card className="shadow-md">
           <CardHeader>
-            <CardTitle>Assistente Virtual</CardTitle>
+            <CardTitle>..</CardTitle>
           </CardHeader>
           <CardContent>
             <AppBarChat />
@@ -92,7 +100,7 @@ export default function Dashboard() {
       <div className="col-span-1 md:col-span-2">
         <Card className="shadow-md ">
           <CardHeader>
-            <CardTitle>Estatísticas Visuais</CardTitle>
+            <CardTitle>..</CardTitle>
           </CardHeader>
           <CardContent>
             <ChartPieDonutText />

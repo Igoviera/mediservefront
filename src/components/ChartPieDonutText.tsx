@@ -22,9 +22,9 @@ import {
 export const description = "A donut chart with text";
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
+  { browser: "Dr. Paulo", visitors: 5, fill: "var(--color-chrome)" },
+  { browser: "Dr. José", visitors: 10, fill: "var(--color-safari)" },
+  { browser: "Dr. Ana", visitors: 8, fill: "var(--color-firefox)" },
  
 ];
 

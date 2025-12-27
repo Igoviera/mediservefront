@@ -1,45 +1,32 @@
 import { ColumnDef } from "@tanstack/react-table";
-import { format, set, nextMonday, nextTuesday, nextWednesday, nextThursday, nextFriday, nextSaturday, nextSunday } from "date-fns";
+import { format, set, getDay, nextDay } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export type Appointment = {
   id: number;
   patientName: string;
   doctorName: string;
-  dayOfWeek: string;
-  time: string;
+  date: string;
   status: string;
 };
 
-function getNextDateFromDayOfWeek(dayOfWeek: string): Date {
-  const today = new Date();
-
-  switch (dayOfWeek.toUpperCase()) {
-    case "MONDAY":
-      return nextMonday(today);
-    case "TUESDAY":
-      return nextTuesday(today);
-    case "WEDNESDAY":
-      return nextWednesday(today);
-    case "THURSDAY":
-      return nextThursday(today);
-    case "FRIDAY":
-      return nextFriday(today);
-    case "SATURDAY":
-      return nextSaturday(today);
-    case "SUNDAY":
-      return nextSunday(today);
-    default:
-      return today; // fallback caso o valor esteja errado
-  }
-}
+// Mapeia os nomes dos dias da semana para os índices de date-fns
+const dayMap: { [key: string]: number } = {
+  SUNDAY: 0,
+  MONDAY: 1,
+  TUESDAY: 2,
+  WEDNESDAY: 3,
+  THURSDAY: 4,
+  FRIDAY: 5,
+  SATURDAY: 6,
+};
 
 export const appointmentColumns: ColumnDef<Appointment>[] = [
-  {
-    accessorKey: "id",
-    header: "Id",
-    enableColumnFilter: true,
-  },
+  // {
+  //   accessorKey: "id",
+  //   header: "Id",
+  //   enableColumnFilter: true,
+  // },
   {
     accessorKey: "patientName",
     header: "Paciente",
@@ -55,24 +42,15 @@ export const appointmentColumns: ColumnDef<Appointment>[] = [
     header: "Data",
     enableColumnFilter: true,
     cell: ({ row }) => {
-      const dayOfWeek = row.getValue("dayOfWeek") as string;
-      const time = row.getValue("time") as string;
+      const value = row.original.date;
 
-      const baseDate = getNextDateFromDayOfWeek(dayOfWeek);
+      if (!value) return "Data inválida";
 
-      const [hours = 0, minutes = 0, seconds = 0] = time?.split(":")?.map(Number) || [];
+      const parsedDate = new Date(value);
 
-      const finalDate = set(baseDate, {
-        hours,
-        minutes,
-        seconds,
-      });
-
-      const formatted = format(finalDate, "dd/MM/yyyy 'às' HH:mm", {
+      return format(parsedDate, "EEEE, dd 'de' MMMM 'às' HH:mm", {
         locale: ptBR,
       });
-
-      return <span>{formatted}</span>;
     },
   },
   {
@@ -80,14 +58,16 @@ export const appointmentColumns: ColumnDef<Appointment>[] = [
     header: "Status",
     cell: ({ row }) => {
       const status = row.getValue("status") as string;
-
       const statusStyle =
-        status === "AGENDADA"
-          ? "bg-green-300 text-green-800"
-          : "bg-red-300 text-red-800";
-
+        status === "AGENDADA" 
+        ? "bg-green-300 text-green-800"
+        : status === "CANCELA" 
+        ? "bg-red-300 text-red-800"
+        : "bg-blue-300 text-blue-800";
       return (
-        <span className={`px-4 py-1 text-xs font-medium rounded-full ${statusStyle}`}>
+        <span
+          className={`px-4 py-1 text-xs font-medium rounded-full ${statusStyle}`}
+        >
           {status}
         </span>
       );

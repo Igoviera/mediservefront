@@ -1,7 +1,10 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { PersonDetailsButton } from "../personDetailsButton";
 import { Dialog } from "@radix-ui/react-dialog";
-import { DialogAgenda } from "../Agenda";
+import { AppointmentDialog, AppointmentRequest } from "../AppointmentDialog";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { AgendarConsultaButton } from "../AgendarConsultaButton";
 
 export type Doctor = {
   id: number;
@@ -36,6 +39,11 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
     accessorKey: "name",
     header: "Nome",
     enableColumnFilter: true,
+    cell: ({ row }) => {
+      const name = row.original.name;
+      // Adiciona 'Dr' na frente do nome
+      return `Dr. ${name}`;
+    },
   },
   {
     accessorKey: "specialties",
@@ -90,7 +98,7 @@ export const medicoColumns: ColumnDef<Doctor>[] = [
       return (
         <div className="flex items-center gap-2">
           <PersonDetailsButton person={doctor} type="doctor" />
-          <DialogAgenda/>
+          <AgendarConsultaButton doctor={doctor} />
         </div>
       );
     },

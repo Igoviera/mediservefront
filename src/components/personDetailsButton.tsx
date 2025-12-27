@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Mail, Phone, MapPin, User, HeartPulse,Eye} from "lucide-react";
+import { Mail, Phone, MapPin, User, HeartPulse, Eye } from "lucide-react";
 
 type PersonType = "doctor" | "patient" | "user";
 
@@ -60,7 +60,7 @@ export function PersonDetailsButton({
           size="sm"
           className="bg-transparent border border-blue-500 text-blue-500 hover:border-blue-700 hover:text-blue-700 px-4 py-2 rounded hover:bg-transparent"
         >
-          <Eye/>
+          <Eye />
           Detalhes
         </Button>
       </DialogTrigger>
@@ -68,7 +68,7 @@ export function PersonDetailsButton({
       <DialogContent className="max-w-3xl p-6">
         <DialogHeader>
           <DialogTitle className="text-3xl font-bold text-blue-700 mt-5">
-            {person.name}
+            {type === "doctor" ? `Dr. ${person.name}` : person.name}
           </DialogTitle>
           <DialogDescription className="text-muted-foreground">
             {type === "doctor"

@@ -8,12 +8,12 @@ import {
   appointmentColumns,
 } from "@/components/colmuns/appointments-clmns";
 import appointmentsService from "@/services/appointmentsService";
-import { Calendar, CalendarCheck, ClipboardList } from "lucide-react";
+import { CalendarCheck } from "lucide-react";
 import { CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Label } from "recharts";
+import { AppointmentRequest } from "@/components/AppointmentDialog";
 
 export default function MedicosCadastrados() {
-  const [appointments, setAppointment] = useState<Appointment[]>([]);
+  const [appointments, setAppointment] = useState<AppointmentRequest[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
